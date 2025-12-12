@@ -48,6 +48,7 @@ const initialState = {
     status: 'idle',
     error: null,
     selected: null,
+    reviews: {}, // { productId: [{ id, userName, rating, comment, date }] }
 }
 
 const productsSlice = createSlice({
@@ -55,6 +56,13 @@ const productsSlice = createSlice({
     initialState,
     reducers: {
         clearSelected: (state) => { state.selected = null },
+        addReview: (state, action) => {
+            const { productId, review } = action.payload
+            if (!state.reviews[productId]) {
+                state.reviews[productId] = []
+            }
+            state.reviews[productId].unshift(review)
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -67,5 +75,5 @@ const productsSlice = createSlice({
     }
 })
 
-export const { clearSelected } = productsSlice.actions
+export const { clearSelected, addReview } = productsSlice.actions
 export default productsSlice.reducer
