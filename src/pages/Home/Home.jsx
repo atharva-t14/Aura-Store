@@ -1,42 +1,95 @@
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { categories } from '../../data/products.js'
-import { FaMobileAlt, FaTshirt, FaHome, FaSpa, FaDumbbell, FaBook, FaCube, FaCar } from 'react-icons/fa'
+import { FaMale, FaFemale, FaShoePrints, FaGem, FaRunning, FaTshirt, FaUserTie, FaTshirt as FaCasual, FaSnowflake, FaSun, FaCrown, FaSuitcase } from 'react-icons/fa'
+
+const heroImages = [
+    'src/data/oliviarodrigoimage.webp',
+    'https://images.unsplash.com/photo-1445205170230-053b83016050?w=1200&h=600&fit=crop',
+    'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1200&h=600&fit=crop',
+    'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=1200&h=600&fit=crop',
+    'src/data/henrycavilimage.jpg',
+    'src/data/mitrazimage.jpeg',
+]
 
 const categoryIcons = {
-    'Electronics': FaMobileAlt,
-    'Fashion': FaTshirt,
-    'Home & Kitchen': FaHome,
-    'Beauty': FaSpa,
-    'Sports': FaDumbbell,
-    'Books': FaBook,
-    'Toys': FaCube,
-    'Automotive': FaCar
+    'Men\'s Clothing': FaMale,
+    'Women\'s Clothing': FaFemale,
+    'Footwear': FaShoePrints,
+    'Accessories': FaGem,
+    'Sportswear': FaRunning,
+    'Ethnic Wear': FaTshirt,
+    'Formal Wear': FaUserTie,
+    'Casual Wear': FaCasual,
+    'Winter Collection': FaSnowflake,
+    'Summer Collection': FaSun,
+    'Luxury Brands': FaCrown,
+    'Bags & Luggage': FaSuitcase
 }
 
 const categoryColors = {
-    'Electronics': 'from-amber-400 to-amber-600',
-    'Fashion': 'from-amber-300 to-amber-500',
-    'Home & Kitchen': 'from-amber-200 to-amber-500',
-    'Beauty': 'from-amber-300 to-amber-600',
-    'Sports': 'from-amber-400 to-amber-700',
-    'Books': 'from-amber-300 to-amber-600',
-    'Toys': 'from-amber-300 to-amber-500',
-    'Automotive': 'from-amber-400 to-amber-700'
+    'Men\'s Clothing': 'from-amber-500 to-amber-700',
+    'Women\'s Clothing': 'from-amber-300 to-amber-500',
+    'Footwear': 'from-amber-400 to-amber-600',
+    'Accessories': 'from-amber-300 to-amber-600',
+    'Sportswear': 'from-amber-400 to-amber-700',
+    'Ethnic Wear': 'from-amber-200 to-amber-500',
+    'Formal Wear': 'from-amber-500 to-amber-800',
+    'Casual Wear': 'from-amber-300 to-amber-500',
+    'Winter Collection': 'from-amber-200 to-amber-400',
+    'Summer Collection': 'from-amber-400 to-amber-600',
+    'Luxury Brands': 'from-amber-500 to-amber-700',
+    'Bags & Luggage': 'from-amber-400 to-amber-600'
 }
 
 export default function Home() {
     const user = useSelector(s => s.auth.user)
+    const [currentImageIndex, setCurrentImageIndex] = useState(0)
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentImageIndex((prev) => (prev + 1) % heroImages.length)
+        }, 3000)
+        return () => clearInterval(interval)
+    }, [])
+
     return (
         <div className="space-y-6">
             {/* Hero Section */}
             <div className="bg-[var(--bg-surface)] border border-[var(--bg-muted)] rounded-xl shadow-sm overflow-hidden">
-                <div className="bg-gradient-to-r from-[#c07c32] via-[#f7a620] to-[#c07c32] text-[var(--bg-base)] p-8 md:p-14">
-                    <h1 className="text-3xl md:text-5xl font-extrabold">Shop the latest styles</h1>
-                    <p className="mt-3 text-[var(--bg-base)]/80 max-w-2xl">Curated selections with a bold dark-amber vibe.</p>
-                    <div className="mt-6 flex gap-3">
-                        <Link to="/products" className="bg-[var(--bg-base)] text-brand font-semibold px-5 py-2 rounded hover:bg-[#130f1a] transition">Shop Now</Link>
-                        {!user && <Link to="/login" className="border border-[var(--bg-base)] text-[var(--bg-base)] font-semibold px-5 py-2 rounded hover:bg-[var(--bg-base)]/10 transition">Login</Link>}
+                <div
+                    className="relative h-80 md:h-96 flex flex-col justify-center p-8 md:p-14 bg-cover bg-center transition-all duration-1000"
+                    style={{
+                        backgroundImage: `url("${heroImages[currentImageIndex]}")`,
+                        backgroundBlendMode: 'overlay'
+                    }}
+                >
+                    {/* Brightness layer */}
+                    <div className="absolute inset-0 bg-white/30"></div>
+
+                    {/* Gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#0f0a05]/90 via-[#1a1209]/70 to-[#0f0a05]/90"></div>
+
+                    <div className="relative z-10">
+                        <h1 className="text-3xl md:text-5xl font-extrabold text-white">Shop the latest styles</h1>
+                        <p className="mt-3 text-gray-300 max-w-2xl">Discover curated collections crafted for every lifestyle and occasion.</p>
+                        <div className="mt-6 flex gap-3">
+                            <Link to="/products" className="bg-brand text-[var(--bg-base)] font-semibold px-5 py-2 rounded hover:bg-brand-dark transition">Shop Now</Link>
+                            {!user && <Link to="/login" className="border border-white text-white font-semibold px-5 py-2 rounded hover:bg-white/10 transition">Login</Link>}
+                        </div>
+                    </div>
+
+                    {/* Indicator dots */}
+                    <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2 z-10">
+                        {heroImages.map((_, idx) => (
+                            <button
+                                key={idx}
+                                onClick={() => setCurrentImageIndex(idx)}
+                                className={`w-2 h-2 rounded-full transition-all ${idx === currentImageIndex ? 'bg-brand w-6' : 'bg-white/50 hover:bg-white/80'}`}
+                                aria-label={`Go to slide ${idx + 1}`}
+                            />
+                        ))}
                     </div>
                 </div>
             </div>

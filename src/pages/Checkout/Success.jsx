@@ -53,7 +53,7 @@ export default function Success() {
                                 items.map(i => (
                                     <div key={i.id} className="flex gap-3 py-3">
                                         <div className="w-16 h-16 rounded border border-[var(--bg-muted)] bg-[var(--bg-base)] flex items-center justify-center overflow-hidden">
-                                            <img src={i.image} alt={i.title} className="w-full h-full object-contain" />
+                                            <img src={i.image} alt={i.title} className="w-full h-full object-contain" loading="lazy" />
                                         </div>
                                         <div className="flex-1 space-y-1">
                                             <p className="text-sm font-semibold line-clamp-2">{i.title}</p>

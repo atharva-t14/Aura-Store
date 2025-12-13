@@ -139,6 +139,7 @@ export default function ProductDetail() {
                             src={product.images[selectedImage]}
                             alt={product.title}
                             className="max-h-96 object-contain transition-transform duration-300"
+                            loading="lazy"
                         />
 
                         {/* Lens overlay */}
@@ -168,7 +169,7 @@ export default function ProductDetail() {
                                     className={`aspect-square border-2 rounded-lg overflow-hidden transition ${selectedImage === i ? 'border-brand' : 'border-[var(--bg-muted)] hover:border-brand/60'
                                         }`}
                                 >
-                                    <img src={img} alt={`${product.title} ${i + 1}`} className="w-full h-full object-contain" />
+                                    <img src={img} alt={`${product.title} ${i + 1}`} className="w-full h-full object-contain" loading="lazy" />
                                 </button>
                             ))}
                         </div>
@@ -289,6 +290,12 @@ export default function ProductDetail() {
                                     placeholder="Share your thoughts about this product..."
                                     className="w-full border border-[var(--bg-muted)] bg-[var(--bg-base)] text-[var(--text-primary)] rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand"
                                     rows="4"
+                                    onKeyDown={(e) => {
+                                        if (e.key === 'Enter' && !e.shiftKey) {
+                                            e.preventDefault()
+                                            e.currentTarget.form?.requestSubmit()
+                                        }
+                                    }}
                                 />
                             </div>
                             <button

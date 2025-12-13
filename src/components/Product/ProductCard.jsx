@@ -8,8 +8,8 @@ export default function ProductCard({ product }) {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
-    const cardBase = 'bg-[var(--bg-surface)] border border-[var(--bg-muted)] shadow-sm hover:shadow-lg'
-    const thumbBg = 'bg-[var(--bg-muted)]'
+    const cardBase = 'bg-[var(--bg-surface)] border border-[var(--bg-muted)] shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-transform'
+    const thumbBg = 'bg-gradient-to-br from-brand/12 via-amber-300/10 to-brand/8'
     const titleColor = 'text-[var(--text-primary)]'
     const descColor = 'text-[var(--text-muted)]'
     const priceColor = 'text-[var(--text-primary)]'
@@ -37,7 +37,7 @@ export default function ProductCard({ product }) {
             className={`group relative rounded-lg transition overflow-hidden cursor-pointer ${cardBase}`}
         >
             <div className={`aspect-square ${thumbBg} flex items-center justify-center`}>
-                <img src={product.image} alt={product.title} className="h-40 object-contain group-hover:scale-105 transition" />
+                <img src={product.image} alt={product.title} className="h-40 object-contain group-hover:scale-105 transition" loading="lazy" />
             </div>
             <div className="p-3 space-y-1">
                 <h3 className={`text-sm font-semibold line-clamp-2 ${titleColor}`}>{product.title}</h3>
@@ -52,9 +52,9 @@ export default function ProductCard({ product }) {
             </div>
 
             {/* Hover Quick View */}
-            <div className={`absolute inset-0 lg:-inset-4 shadow-2xl backdrop-blur-sm opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition duration-200 flex flex-col gap-3 p-4 z-10 border ${overlayBg} ${borderTone}`}>
-                <div className={`w-full ${thumbBg} rounded-lg flex items-center justify-center py-6`}>
-                    <img src={product.image} alt={product.title} className="h-32 object-contain" />
+            <div className={`absolute inset-0 lg:-inset-4 shadow-2xl opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition duration-200 flex flex-col gap-3 p-4 z-10 border ${overlayBg} ${borderTone}`}>
+                <div className={`w-full ${thumbBg} rounded-lg flex items-center justify-center py-6 border border-brand/20`}>
+                    <img src={product.image} alt={product.title} className="h-32 object-contain" loading="lazy" />
                 </div>
 
                 <div className="space-y-2">

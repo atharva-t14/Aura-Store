@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { increaseQty, decreaseQty, removeFromCart, addToCart } from '../../redux/slices/cartSlice.js'
 import { fetchProducts } from '../../redux/slices/productsSlice.js'
 import { FaTrash, FaPlus, FaMinus, FaShoppingCart } from 'react-icons/fa'
+import toast from 'react-hot-toast'
 
 export default function Cart() {
     const items = useSelector(s => s.cart.items)
@@ -49,14 +50,24 @@ export default function Cart() {
                 {items.map(item => (
                     <div key={item.id} className="p-4 flex gap-4">
                         <div className="w-24 h-24 rounded-lg bg-[var(--bg-muted)] border border-[var(--bg-muted)] flex items-center justify-center overflow-hidden">
-                            <img src={item.image} alt={item.title} className="w-full h-full object-contain" />
+                            <img src={item.image} alt={item.title} className="w-full h-full object-contain" loading="lazy" />
                         </div>
                         <div className="flex-1 min-w-0">
                             <h3 className="font-semibold text-[var(--text-primary)] line-clamp-2">{item.title}</h3>
                             <p className="text-sm text-[var(--text-muted)] mt-1">₹{(item.price * 83).toFixed(0)} each</p>
                             <div className="flex items-center gap-3 mt-3">
                                 <div className="flex items-center rounded-lg border border-[var(--bg-muted)] overflow-hidden">
-                                    <button className="px-3 py-2 hover:bg-[var(--bg-muted)]" onClick={() => dispatch(decreaseQty(item.id))}><FaMinus /></button>
+                                    <button
+                                        className="px-3 py-2 hover:bg-[var(--bg-muted)]"
+                                        onClick={() => {
+                                            if (item.qty === 1) {
+                                                toast.success(`Removed "${item.title}"`)
+                                            }
+                                            dispatch(decreaseQty(item.id))
+                                        }}
+                                    >
+                                        <FaMinus />
+                                    </button>
                                     <span className="px-4 py-2 font-semibold text-[var(--text-primary)]">{item.qty}</span>
                                     <button className="px-3 py-2 hover:bg-[var(--bg-muted)]" onClick={() => dispatch(increaseQty(item.id))}><FaPlus /></button>
                                 </div>
@@ -110,7 +121,7 @@ export default function Cart() {
                         {recommendations.map(p => (
                             <div key={p.id} className="border border-[var(--bg-muted)] bg-[var(--bg-base)]/60 rounded-lg p-3 hover:border-brand/60 transition">
                                 <div className="h-32 bg-[var(--bg-base)] rounded flex items-center justify-center overflow-hidden mb-3 border border-[var(--bg-muted)]">
-                                    <img src={p.image} alt={p.title} className="h-full object-contain" />
+                                    <img src={p.image} alt={p.title} className="h-full object-contain" loading="lazy" />
                                 </div>
                                 <p className="text-sm font-semibold text-[var(--text-primary)] line-clamp-2">{p.title}</p>
                                 <p className="text-xs text-[var(--text-muted)] mt-1">₹{(p.price * 83).toFixed(0)}</p>
