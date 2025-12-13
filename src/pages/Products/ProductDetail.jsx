@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams, useNavigate } from 'react-router-dom'
 import { fetchProductById, addReview } from '../../redux/slices/productsSlice.js'
@@ -15,7 +15,8 @@ export default function ProductDetail() {
     const productReviews = useSelector(s => s.products.reviews[id] || [])
     const [qty, setQty] = useState(1)
     const [selectedImage, setSelectedImage] = useState(0)
-    const [isZoomed, setIsZoomed] = useState(false)
+    const [showZoom, setShowZoom] = useState(false)
+    const [zoomPos, setZoomPos] = useState({ x: 0, y: 0 })
     const [showReviewForm, setShowReviewForm] = useState(false)
     const [newReview, setNewReview] = useState({ rating: 5, comment: '' })
 
@@ -35,6 +36,8 @@ export default function ProductDetail() {
         }))
         toast.success(`Added ${qty} item(s) to cart`)
     }
+
+    const imageRef = useRef(null)
 
     const renderStars = (rating) => {
         const stars = []
@@ -78,6 +81,27 @@ export default function ProductDetail() {
         toast.success('Review submitted successfully!')
     }
 
+    const lensSize = 120
+    const lensStyle = (() => {
+        if (!imageRef.current) return { width: lensSize, height: lensSize }
+        const rect = imageRef.current.getBoundingClientRect()
+        const left = Math.min(Math.max(zoomPos.x - lensSize / 2, 0), rect.width - lensSize)
+        const top = Math.min(Math.max(zoomPos.y - lensSize / 2, 0), rect.height - lensSize)
+        return { width: lensSize, height: lensSize, left, top }
+    })()
+
+    const zoomWindowStyle = (() => {
+        if (!imageRef.current) return {}
+        const { width, height } = imageRef.current.getBoundingClientRect()
+        const bgX = (zoomPos.x / width) * 100
+        const bgY = (zoomPos.y / height) * 100
+        return {
+            backgroundImage: `url(${product?.images?.[selectedImage] || ''})`,
+            backgroundSize: '200% 200%',
+            backgroundPosition: `${bgX}% ${bgY}%`
+        }
+    })()
+
     if (!product) {
         return (
             <div className="bg-white rounded-lg shadow p-6">
@@ -99,15 +123,39 @@ export default function ProductDetail() {
                 {/* Image Gallery */}
                 <div>
                     <div
-                        className="relative aspect-square bg-gray-50 rounded-lg flex items-center justify-center overflow-hidden group cursor-zoom-in"
-                        onMouseEnter={() => setIsZoomed(true)}
-                        onMouseLeave={() => setIsZoomed(false)}
+                        ref={imageRef}
+                        className="relative aspect-square bg-gray-50 rounded-lg flex items-center justify-center overflow-visible group cursor-crosshair"
+                        onMouseEnter={() => setShowZoom(true)}
+                        onMouseLeave={() => setShowZoom(false)}
+                        onMouseMove={(e) => {
+                            if (!imageRef.current) return
+                            const rect = imageRef.current.getBoundingClientRect()
+                            const x = Math.min(Math.max(e.clientX - rect.left, 0), rect.width)
+                            const y = Math.min(Math.max(e.clientY - rect.top, 0), rect.height)
+                            setZoomPos({ x, y })
+                        }}
                     >
                         <img
                             src={product.images[selectedImage]}
                             alt={product.title}
-                            className={`max-h-96 object-contain transition-transform duration-300 ${isZoomed ? 'scale-150' : 'scale-100'}`}
+                            className="max-h-96 object-contain transition-transform duration-300"
                         />
+
+                        {/* Lens overlay */}
+                        {showZoom && (
+                            <div
+                                className="absolute pointer-events-none border-2 border-brand/60 bg-white/40 rounded"
+                                style={lensStyle}
+                            />
+                        )}
+
+                        {/* Zoom window */}
+                        {showZoom && imageRef.current && (
+                            <div
+                                className="hidden md:block absolute top-2 left-full ml-4 w-64 h-64 border rounded-lg overflow-hidden shadow-lg bg-white z-20"
+                                style={zoomWindowStyle}
+                            />
+                        )}
                     </div>
 
                     {/* Thumbnails */}

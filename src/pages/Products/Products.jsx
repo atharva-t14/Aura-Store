@@ -1,14 +1,18 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useSearchParams } from 'react-router-dom'
 import { fetchProducts } from '../../redux/slices/productsSlice.js'
 import ProductCard from '../../components/Product/ProductCard.jsx'
 import ProductCardSkeleton from '../../components/Skeletons/ProductCardSkeleton.jsx'
 import { FaStar } from 'react-icons/fa'
+import { categories } from '../../data/products.js'
 
 export default function Products() {
     const dispatch = useDispatch()
     const { list, status } = useSelector(s => s.products)
+    const [searchParams, setSearchParams] = useSearchParams()
     const [search, setSearch] = useState('')
+    const [selectedCategory, setSelectedCategory] = useState(searchParams.get('category') || 'All')
     const [rating, setRating] = useState(0)
     const [minPrice, setMinPrice] = useState(0)
     const [maxPrice, setMaxPrice] = useState(10000)
@@ -17,20 +21,27 @@ export default function Products() {
 
     useEffect(() => { if (status === 'idle') dispatch(fetchProducts()) }, [status, dispatch])
 
+    // Set category from URL params
+    useEffect(() => {
+        const category = searchParams.get('category')
+        if (category) setSelectedCategory(category)
+    }, [searchParams])
+
     // Debounce search
     const [debounced, setDebounced] = useState('')
     useEffect(() => { const id = setTimeout(() => setDebounced(search), 300); return () => clearTimeout(id) }, [search])
 
-    useEffect(() => { setPage(1) }, [debounced, rating, minPrice, maxPrice])
+    useEffect(() => { setPage(1) }, [debounced, rating, minPrice, maxPrice, selectedCategory])
 
     const filtered = useMemo(() => {
         return list.filter(p => {
             const priceInr = p.price * 83
             return (!debounced || p.title.toLowerCase().includes(debounced.toLowerCase())) &&
+                (selectedCategory === 'All' || p.category === selectedCategory) &&
                 (p.rating >= rating) &&
                 (priceInr >= minPrice && priceInr <= maxPrice)
         })
-    }, [list, debounced, rating, minPrice, maxPrice])
+    }, [list, debounced, rating, minPrice, maxPrice, selectedCategory])
 
     const totalPages = useMemo(() => Math.max(1, Math.ceil(filtered.length / pageSize)), [filtered.length])
     const paginated = useMemo(() => {
@@ -56,6 +67,21 @@ export default function Products() {
                         placeholder="Search products..."
                         className="w-full border rounded px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-brand"
                     />
+                </div>
+
+                {/* Category Filter */}
+                <div className="mb-6">
+                    <label className="text-sm font-medium mb-2 block">Category</label>
+                    <select
+                        value={selectedCategory}
+                        onChange={e => setSelectedCategory(e.target.value)}
+                        className="w-full border rounded px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-brand"
+                    >
+                        <option value="All">All Categories</option>
+                        {categories.map(cat => (
+                            <option key={cat} value={cat}>{cat}</option>
+                        ))}
+                    </select>
                 </div>
 
                 {/* Min Rating - Stars */}

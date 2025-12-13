@@ -1,22 +1,12 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { products } from '../../data/products.js'
 
-// Use DummyJSON to fetch 50 products out-of-the-box
+// Use custom local database instead of API
 export const fetchProducts = createAsyncThunk('products/fetch', async (_, { rejectWithValue }) => {
     try {
-        const res = await fetch('https://dummyjson.com/products?limit=50')
-        if (!res.ok) throw new Error('Failed to fetch products')
-        const data = await res.json()
-        return data.products.map(p => ({
-            id: p.id,
-            title: p.title,
-            description: p.description,
-            price: p.price, // USD
-            category: p.category,
-            image: p.thumbnail,
-            images: p.images?.length ? p.images : [p.thumbnail],
-            rating: p.rating || 0,
-            ratingCount: p.reviews?.length || p.stock || 50,
-        }))
+        // Simulate async delay like real API
+        await new Promise(resolve => setTimeout(resolve, 300))
+        return products
     } catch (e) {
         return rejectWithValue(e.message)
     }
@@ -24,20 +14,11 @@ export const fetchProducts = createAsyncThunk('products/fetch', async (_, { reje
 
 export const fetchProductById = createAsyncThunk('products/fetchById', async (id, { rejectWithValue }) => {
     try {
-        const res = await fetch(`https://dummyjson.com/products/${id}`)
-        if (!res.ok) throw new Error('Failed to fetch product')
-        const p = await res.json()
-        return {
-            id: p.id,
-            title: p.title,
-            description: p.description,
-            price: p.price,
-            category: p.category,
-            image: p.thumbnail,
-            images: p.images?.length ? p.images : [p.thumbnail],
-            rating: p.rating || 0,
-            ratingCount: p.reviews?.length || p.stock || 50,
-        }
+        // Simulate async delay
+        await new Promise(resolve => setTimeout(resolve, 200))
+        const product = products.find(p => p.id === Number(id))
+        if (!product) throw new Error('Product not found')
+        return product
     } catch (e) {
         return rejectWithValue(e.message)
     }
