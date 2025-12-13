@@ -77,7 +77,7 @@ AuraStore is a frontend-only e-commerce application that demonstrates real-world
 
 <img width="1920" height="1682" alt="screencapture-localhost-5173-2025-12-13-18_27_08" src="https://github.com/user-attachments/assets/666985b1-4b24-4588-9b28-81b72774e4e4" />
 
-<img width="421" height="458" alt="Screenshot 2025-12-13 182907" src="https://github.com/user-attachments/assets/e043c235-2213-4d9a-8c04-4d16467ab257" />
+<img width="1898" height="908" alt="Screenshot 2025-12-13 183011" src="https://github.com/user-attachments/assets/bb37bc8a-76ba-4510-9d97-d710f2ed7449" />
 
 <img width="1897" height="896" alt="Screenshot 2025-12-13 183503" src="https://github.com/user-attachments/assets/efb5b02a-6d51-4c37-890a-51d00853343b" />
 
@@ -93,8 +93,31 @@ AuraStore is a frontend-only e-commerce application that demonstrates real-world
 
 <img width="1919" height="909" alt="Screenshot 2025-12-13 183338" src="https://github.com/user-attachments/assets/31d07651-ff0f-4f1f-bf87-7f08074d202d" />
 
-<img width="1899" height="900" alt="Screenshot 2025-12-13 183359" src="https://github.com/user-attachments/assets/0cc1887f-1af2-4cbd-b774-676f3bd1ff7e" />
+<img width="1899" height="900" alt="Screenshot 2025-12-13 183359" src="https://github.com/user-attachments/assets/0cc1887f-1af2-4cbd-b774-676f3bd1ff7e" 
 
+<img width="1892" height="906" alt="Screenshot 2025-12-13 183035" src="https://github.com/user-attachments/assets/ce3303a5-ad9c-4de2-9b64-98df945e06ef" />
+
+<img width="1897" height="898" alt="Screenshot 2025-12-13 183024" src="https://github.com/user-attachments/assets/232410fa-f4b9-4993-8761-343b997e8fd3" />
+
+
+
+Light Mode
+
+<img width="1920" height="1682" alt="screencapture-localhost-5173-2025-12-13-18_26_39" src="https://github.com/user-attachments/assets/3c1bb8c3-9632-480b-8528-4b23a3cf71bc" />
+
+<img width="1899" height="966" alt="image" src="https://github.com/user-attachments/assets/119d8b07-f5cc-40ea-bd33-84fe0d09f2a9" />
+
+<img width="1897" height="910" alt="Screenshot 2025-12-13 183137" src="https://github.com/user-attachments/assets/fa06f955-19b1-430b-a1d6-029a5fc21be4" />
+
+<img width="1919" height="907" alt="Screenshot 2025-12-13 183155" src="https://github.com/user-attachments/assets/229de8f0-8b47-437a-87d0-6a85df9ef2ec" />
+
+<img width="1919" height="906" alt="Screenshot 2025-12-13 183317" src="https://github.com/user-attachments/assets/fb138385-8a13-485b-89c7-ba46cd234c7b" />
+
+<img width="1919" height="909" alt="Screenshot 2025-12-13 183328" src="https://github.com/user-attachments/assets/97acf89b-9391-409f-b037-af5a38223e47" />
+
+<img width="1896" height="904" alt="Screenshot 2025-12-13 183407" src="https://github.com/user-attachments/assets/fcd25c56-9438-4477-95ed-1edae3a25bc8" />
+
+<img width="1901" height="908" alt="Screenshot 2025-12-13 183453" src="https://github.com/user-attachments/assets/9e5a23af-1d6f-4565-b078-75130f6b4169" />
 
 ## 🏗️ Project Structure
 
