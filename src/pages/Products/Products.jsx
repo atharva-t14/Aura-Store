@@ -115,21 +115,10 @@ export default function Products() {
 
     return (
         <div className="flex gap-6 bg-[var(--bg-base)] min-h-screen p-4 md:p-6 rounded-lg">
-            {/* Mobile Sidebar Overlay */}
-            {showMobileSidebar && (
-                <div 
-                    className="fixed inset-0 bg-black/50 z-40 lg:hidden"
-                    onClick={closeMobileSidebar}
-                />
-            )}
-
-            {/* Sidebar Filters */}
-            <aside className={`w-64 bg-gradient-to-b from-[var(--bg-surface-solid)] to-[var(--bg-base-secondary)] border border-[var(--border-subtle)] rounded-xl shadow-[var(--shadow-md)] p-4 h-fit max-h-[calc(100vh-6rem)] sticky top-20 overflow-y-auto transition-transform duration-300 lg:block ${showMobileSidebar ? 'fixed top-0 left-0 h-full max-h-screen z-50 rounded-none' : 'hidden'}`}>
+            {/* Desktop Sidebar Filters */}
+            <aside className="hidden lg:block w-64 bg-gradient-to-b from-[var(--bg-surface-solid)] to-[var(--bg-base-secondary)] border border-[var(--border-subtle)] rounded-xl shadow-[var(--shadow-md)] p-4 h-fit max-h-[calc(100vh-6rem)] sticky top-20 overflow-y-auto">
                 <div className="flex items-start justify-between mb-4">
                     <h3 className="font-semibold text-lg text-[var(--text-primary)]">Filters</h3>
-                    <button className="lg:hidden text-[var(--text-primary)] hover:text-brand" onClick={closeMobileSidebar}>
-                        <FaTimes className="text-xl" />
-                    </button>
                 </div>
                 {/* Category Filter */}
                 <div className="mb-6">
@@ -272,11 +261,11 @@ export default function Products() {
                 {/* Mobile Filter Toggle */}
                 <div className="lg:hidden flex items-center gap-3 mb-4">
                     <button
-                        onClick={() => setShowMobileSidebar(true)}
+                        onClick={() => setShowMobileSidebar(!showMobileSidebar)}
                         className="flex items-center gap-2 bg-gradient-to-br from-[var(--bg-surface-solid)] to-[var(--bg-accent)] border border-[var(--border-subtle)] rounded-lg px-4 py-2.5 text-sm font-medium text-[var(--text-primary)] hover:shadow-[var(--shadow-sm)] hover:border-brand/30 transition-all"
                     >
                         <FaFilter className="text-brand" />
-                        Filters
+                        {showMobileSidebar ? 'Hide' : 'Show'} Filters
                     </button>
                     <input
                         value={search}
@@ -285,6 +274,153 @@ export default function Products() {
                         className="flex-1 border border-[var(--bg-muted)] rounded px-3 py-2 text-sm bg-[var(--bg-base)] text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-brand/60"
                     />
                 </div>
+
+                {/* Mobile Filters - Inline */}
+                {showMobileSidebar && (
+                    <div className="lg:hidden bg-gradient-to-b from-[var(--bg-surface-solid)] to-[var(--bg-base-secondary)] border border-[var(--border-subtle)] rounded-xl shadow-[var(--shadow-md)] p-4 mb-4">
+                        <div className="flex items-start justify-between mb-4">
+                            <h3 className="font-semibold text-lg text-[var(--text-primary)]">Filters</h3>
+                            <button className="text-[var(--text-primary)] hover:text-brand" onClick={closeMobileSidebar}>
+                                <FaTimes className="text-xl" />
+                            </button>
+                        </div>
+
+                        {/* Category Filter */}
+                        <div className="mb-6">
+                            <label className="text-sm font-medium mb-2 block">Category</label>
+                            <div className="space-y-2">
+                                <label className="flex items-center gap-2 cursor-pointer hover:text-brand transition">
+                                    <input
+                                        type="checkbox"
+                                        checked={selectedCategories.includes('All')}
+                                        onChange={() => handleCategoryToggle('All')}
+                                        className="w-4 h-4 accent-brand rounded"
+                                    />
+                                    <span className="text-sm">All Categories</span>
+                                </label>
+                                {categories.slice(0, 8).map(cat => (
+                                    <label key={cat} className="flex items-center gap-2 cursor-pointer hover:text-brand transition">
+                                        <input
+                                            type="checkbox"
+                                            checked={selectedCategories.includes(cat)}
+                                            onChange={() => handleCategoryToggle(cat)}
+                                            className="w-4 h-4 accent-brand rounded"
+                                        />
+                                        <span className="text-sm">{cat}</span>
+                                    </label>
+                                ))}
+                                {categories.length > 8 && (
+                                    <details className="pt-2">
+                                        <summary className="text-sm font-medium text-brand cursor-pointer hover:text-brand-dark transition">View {categories.length - 8} more</summary>
+                                        <div className="space-y-2 mt-2 pl-0">
+                                            {categories.slice(8).map(cat => (
+                                                <label key={cat} className="flex items-center gap-2 cursor-pointer hover:text-brand transition">
+                                                    <input
+                                                        type="checkbox"
+                                                        checked={selectedCategories.includes(cat)}
+                                                        onChange={() => handleCategoryToggle(cat)}
+                                                        className="w-4 h-4 accent-brand rounded"
+                                                    />
+                                                    <span className="text-sm">{cat}</span>
+                                                </label>
+                                            ))}
+                                        </div>
+                                    </details>
+                                )}
+                            </div>
+                        </div>
+
+                        {/* Sort By */}
+                        <div className="mb-6">
+                            <label className="text-sm font-medium mb-2 block">Sort By</label>
+                            <select
+                                value={sortBy}
+                                onChange={(e) => setSortBy(e.target.value)}
+                                className="w-full border border-[var(--bg-muted)] rounded px-3 py-2 text-sm bg-[var(--bg-base)] text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-brand/60"
+                            >
+                                <option value="featured">Featured</option>
+                                <option value="rating-desc">Rating: High to Low</option>
+                                <option value="price-asc">Price: Low to High</option>
+                                <option value="price-desc">Price: High to Low</option>
+                            </select>
+                        </div>
+
+                        {/* Min Rating - Stars */}
+                        <div className="mb-6">
+                            <label className="text-sm font-medium mb-2 block">Minimum Rating</label>
+                            <div className="flex gap-1">
+                                {[1, 2, 3, 4, 5].map(star => (
+                                    <button
+                                        key={star}
+                                        onClick={() => setRating(star === rating ? 0 : star)}
+                                        className="focus:outline-none transition"
+                                    >
+                                        <FaStar
+                                            className={`text-2xl ${star <= rating ? 'text-amber-400' : 'text-[var(--bg-muted)]'}`}
+                                        />
+                                    </button>
+                                ))}
+                            </div>
+                            {rating > 0 && (
+                                <p className="text-xs text-gray-500 mt-1">{rating}+ stars</p>
+                            )}
+                        </div>
+
+                        {/* Price Range */}
+                        <div className="mb-4">
+                            <label className="text-sm font-medium mb-2 block text-[var(--text-primary)]">Price Range (₹)</label>
+                            <div className="flex items-center justify-between mb-2">
+                                <span className="text-xs text-[var(--text-muted)]">₹{minPrice}</span>
+                                <span className="text-xs text-[var(--text-muted)]">₹{maxPrice}</span>
+                            </div>
+                            <div className="relative h-2">
+                                <input
+                                    type="range"
+                                    min="0"
+                                    max="10000"
+                                    step="100"
+                                    value={minPrice}
+                                    onChange={e => setMinPrice(Math.min(Number(e.target.value), maxPrice - 100))}
+                                    className="absolute w-full h-2 bg-transparent appearance-none pointer-events-none [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-brand [&::-webkit-slider-thumb]:cursor-pointer [&::-moz-range-thumb]:pointer-events-auto [&::-moz-range-thumb]:w-4 [&::-moz-range-thumb]:h-4 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-brand [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:cursor-pointer"
+                                    style={{ zIndex: minPrice > maxPrice - 1000 ? 6 : 5 }}
+                                />
+                                <input
+                                    type="range"
+                                    min="0"
+                                    max="10000"
+                                    step="100"
+                                    value={maxPrice}
+                                    onChange={e => setMaxPrice(Math.max(Number(e.target.value), minPrice + 100))}
+                                    className="absolute w-full h-2 bg-gray-200 appearance-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-brand [&::-webkit-slider-thumb]:cursor-pointer [&::-moz-range-thumb]:w-4 [&::-moz-range-thumb]:h-4 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-brand [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:cursor-pointer"
+                                    style={{ zIndex: 4 }}
+                                />
+                            </div>
+                        </div>
+
+                        {/* Clear Filters */}
+                        <button
+                            onClick={() => { setSearch(''); setRating(0); setMinPrice(0); setMaxPrice(10000); }}
+                            className="w-full text-sm text-brand hover:underline mt-2 mb-6"
+                        >
+                            Clear All Filters
+                        </button>
+
+                        {/* Display Mode */}
+                        <div className="mb-4 pt-4 border-t border-[var(--bg-muted)]">
+                            <label className="text-sm font-medium mb-2 block">Display Mode</label>
+                            <div className="flex items-center justify-between">
+                                <span className="text-xs text-[var(--text-muted)]">Pagination</span>
+                                <label className="relative inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" className="sr-only peer" checked={useInfinite} onChange={e => setUseInfinite(e.target.checked)} />
+                                    <div className="w-11 h-6 bg-[var(--bg-muted)] peer-focus:outline-none rounded-full peer-checked:bg-brand transition-all relative">
+                                        <span className="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full transition-transform peer-checked:translate-x-5" />
+                                    </div>
+                                </label>
+                                <span className="text-xs text-[var(--text-muted)]">Infinite</span>
+                            </div>
+                        </div>
+                    </div>
+                )}
 
                 {status === 'loading' ? (
                     <div className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
