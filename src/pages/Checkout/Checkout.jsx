@@ -57,7 +57,8 @@ export default function Checkout() {
     const prev = () => setStep(s => Math.max(1, s - 1))
 
     const confirm = () => {
-        navigate('/success', { replace: true })
+        // Pass a snapshot of items to Success so receipt remains after cart clears
+        navigate('/success', { replace: true, state: { items } })
     }
 
     const steps = [

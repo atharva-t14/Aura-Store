@@ -1,23 +1,35 @@
-import { useMemo } from 'react'
-import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useEffect, useMemo } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { FaCheckCircle, FaClock, FaHome, FaShoppingBag } from 'react-icons/fa'
+import { clearCart } from '../../redux/slices/cartSlice.js'
 
 export default function Success() {
-    const items = useSelector(s => s.cart.items)
+    const cartItems = useSelector(s => s.cart.items)
     const user = useSelector(s => s.auth.user)
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const location = useLocation()
+
+    // Prefer items passed from Checkout, fallback to cart (e.g., direct visit)
+    const orderItems = location.state?.items ?? cartItems
+
+    // Clear cart once we arrive on success page
+    useEffect(() => {
+        if (cartItems.length > 0) dispatch(clearCart())
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     const { subtotal, shipping, totalItems, grandTotal } = useMemo(() => {
-        const subtotalCalc = items.reduce((a, i) => a + (i.price * 83 * i.qty), 0)
+        const subtotalCalc = orderItems.reduce((a, i) => a + (i.price * 83 * i.qty), 0)
         const shippingCalc = subtotalCalc >= 2000 || subtotalCalc === 0 ? 0 : 99
         return {
             subtotal: subtotalCalc,
             shipping: shippingCalc,
-            totalItems: items.reduce((a, i) => a + i.qty, 0),
+            totalItems: orderItems.reduce((a, i) => a + i.qty, 0),
             grandTotal: subtotalCalc + shippingCalc
         }
-    }, [items])
+    }, [orderItems])
 
     const orderId = useMemo(() => `ORD-${Date.now().toString().slice(-6)}`, [])
 
@@ -47,10 +59,10 @@ export default function Success() {
                             <span className="text-sm text-[var(--text-muted)]">Subtotal ₹{subtotal.toFixed(0)}</span>
                         </div>
                         <div className="divide-y divide-[var(--bg-muted)]">
-                            {items.length === 0 ? (
+                            {orderItems.length === 0 ? (
                                 <p className="py-6 text-center text-[var(--text-muted)]">No items found. Browse products to fill your cart.</p>
                             ) : (
-                                items.map(i => (
+                                orderItems.map(i => (
                                     <div key={i.id} className="flex gap-3 py-3">
                                         <div className="w-16 h-16 rounded border border-[var(--bg-muted)] bg-[var(--bg-base)] flex items-center justify-center overflow-hidden">
                                             <img src={i.image} alt={i.title} className="w-full h-full object-contain" loading="lazy" />
