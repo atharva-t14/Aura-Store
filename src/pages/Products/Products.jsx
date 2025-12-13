@@ -115,8 +115,16 @@ export default function Products() {
 
     return (
         <div className="flex gap-6 bg-[var(--bg-base)] min-h-screen p-4 md:p-6 rounded-lg">
+            {/* Mobile Sidebar Overlay */}
+            {showMobileSidebar && (
+                <div 
+                    className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+                    onClick={closeMobileSidebar}
+                />
+            )}
+
             {/* Sidebar Filters */}
-            <aside className="w-64 bg-gradient-to-b from-[var(--bg-surface-solid)] to-[var(--bg-base-secondary)] border border-[var(--border-subtle)] rounded-xl shadow-[var(--shadow-md)] p-4 h-fit max-h-[calc(100vh-6rem)] sticky top-20 hidden lg:block overflow-y-auto">
+            <aside className={`w-64 bg-gradient-to-b from-[var(--bg-surface-solid)] to-[var(--bg-base-secondary)] border border-[var(--border-subtle)] rounded-xl shadow-[var(--shadow-md)] p-4 h-fit max-h-[calc(100vh-6rem)] sticky top-20 overflow-y-auto transition-transform duration-300 lg:block ${showMobileSidebar ? 'fixed top-0 left-0 h-full max-h-screen z-50 rounded-none' : 'hidden'}`}>
                 <div className="flex items-start justify-between mb-4">
                     <h3 className="font-semibold text-lg text-[var(--text-primary)]">Filters</h3>
                     <button className="lg:hidden text-[var(--text-primary)] hover:text-brand" onClick={closeMobileSidebar}>
