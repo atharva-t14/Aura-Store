@@ -116,7 +116,7 @@ export default function Products() {
     return (
         <div className="flex gap-6 bg-[var(--bg-base)] min-h-screen p-4 md:p-6 rounded-lg">
             {/* Sidebar Filters */}
-            <aside className={`fixed lg:static inset-0 lg:inset-auto w-64 bg-gradient-to-b from-[var(--bg-surface-solid)] to-[var(--bg-base-secondary)] border border-[var(--border-subtle)] rounded-xl shadow-[var(--shadow-md)] p-4 h-screen lg:h-fit lg:sticky top-20 lg:top-20 z-40 lg:z-auto transform transition-transform duration-300 overflow-y-auto lg:overflow-y-visible ${showMobileSidebar ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
+            <aside className="w-64 bg-gradient-to-b from-[var(--bg-surface-solid)] to-[var(--bg-base-secondary)] border border-[var(--border-subtle)] rounded-xl shadow-[var(--shadow-md)] p-4 h-fit max-h-[calc(100vh-6rem)] sticky top-20 hidden lg:block overflow-y-auto">
                 <div className="flex items-start justify-between mb-4">
                     <h3 className="font-semibold text-lg text-[var(--text-primary)]">Filters</h3>
                     <button className="lg:hidden text-[var(--text-primary)] hover:text-brand" onClick={closeMobileSidebar}>
@@ -126,7 +126,7 @@ export default function Products() {
                 {/* Category Filter */}
                 <div className="mb-6">
                     <label className="text-sm font-medium mb-2 block">Category</label>
-                    <div className="space-y-2 max-h-64 overflow-y-auto">
+                    <div className="space-y-2">
                         <label className="flex items-center gap-2 cursor-pointer hover:text-brand transition">
                             <input
                                 type="checkbox"
@@ -136,7 +136,7 @@ export default function Products() {
                             />
                             <span className="text-sm">All Categories</span>
                         </label>
-                        {categories.map(cat => (
+                        {categories.slice(0, 8).map(cat => (
                             <label key={cat} className="flex items-center gap-2 cursor-pointer hover:text-brand transition">
                                 <input
                                     type="checkbox"
@@ -147,6 +147,24 @@ export default function Products() {
                                 <span className="text-sm">{cat}</span>
                             </label>
                         ))}
+                        {categories.length > 8 && (
+                            <details className="pt-2">
+                                <summary className="text-sm font-medium text-brand cursor-pointer hover:text-brand-dark transition">View {categories.length - 8} more</summary>
+                                <div className="space-y-2 mt-2 pl-0">
+                                    {categories.slice(8).map(cat => (
+                                        <label key={cat} className="flex items-center gap-2 cursor-pointer hover:text-brand transition">
+                                            <input
+                                                type="checkbox"
+                                                checked={selectedCategories.includes(cat)}
+                                                onChange={() => handleCategoryToggle(cat)}
+                                                className="w-4 h-4 accent-brand rounded"
+                                            />
+                                            <span className="text-sm">{cat}</span>
+                                        </label>
+                                    ))}
+                                </div>
+                            </details>
+                        )}
                     </div>
                 </div>
 
@@ -230,21 +248,16 @@ export default function Products() {
                     <label className="text-sm font-medium mb-2 block">Display Mode</label>
                     <div className="flex items-center justify-between">
                         <span className="text-xs text-[var(--text-muted)]">Pagination</span>
-                        <label className="inline-flex items-center cursor-pointer">
+                        <label className="relative inline-flex items-center cursor-pointer">
                             <input type="checkbox" className="sr-only peer" checked={useInfinite} onChange={e => setUseInfinite(e.target.checked)} />
-                            <div className="w-11 h-6 bg-[var(--bg-muted)] peer-focus:outline-none rounded-full peer peer-checked:bg-brand transition relative">
-                                <span className="absolute top-0.5 left-0.5 w-5 h-5 bg-[var(--bg-base)] rounded-full transition-transform peer-checked:translate-x-5" />
+                            <div className="w-11 h-6 bg-[var(--bg-muted)] peer-focus:outline-none rounded-full peer-checked:bg-brand transition-all relative">
+                                <span className="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full transition-transform peer-checked:translate-x-5" />
                             </div>
                         </label>
                         <span className="text-xs text-[var(--text-muted)]">Infinite</span>
                     </div>
                 </div>
             </aside>
-
-            {/* Mobile Sidebar Overlay */}
-            {showMobileSidebar && (
-                <div className="fixed inset-0 bg-black/50 z-30 lg:hidden" onClick={closeMobileSidebar} />
-            )}
 
             {/* Main Content */}
             <div className="flex-1 space-y-4">

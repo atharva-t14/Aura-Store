@@ -63,3 +63,27 @@ body {
 .container-max {
     @apply max-w-7xl mx-auto px-4;
 }
+
+/* Subtle scrollbar styling */
+aside::-webkit-scrollbar {
+    width: 6px;
+}
+
+aside::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+aside::-webkit-scrollbar-thumb {
+    background: rgba(247, 166, 32, 0.2);
+    border-radius: 3px;
+}
+
+aside::-webkit-scrollbar-thumb:hover {
+    background: rgba(247, 166, 32, 0.4);
+}
+
+/* Firefox scrollbar */
+aside {
+    scrollbar-color: rgba(247, 166, 32, 0.2) transparent;
+    scrollbar-width: thin;
+}

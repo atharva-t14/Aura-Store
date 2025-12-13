@@ -37,7 +37,7 @@ export default function ProductCard({ product }) {
             className={`group relative rounded-lg transition overflow-hidden cursor-pointer ${cardBase}`}
         >
             <div className={`aspect-square ${thumbBg} flex items-center justify-center`}>
-                <img src={product.image} alt={product.title} className="h-40 object-contain group-hover:scale-105 transition" loading="lazy" />
+                <img src={product.image} alt={product.title} className="h-52 object-contain group-hover:scale-105 transition" loading="lazy" />
             </div>
             <div className="p-3 space-y-1">
                 <h3 className={`text-sm font-semibold line-clamp-2 ${titleColor}`}>{product.title}</h3>
