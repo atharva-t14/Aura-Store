@@ -73,6 +73,29 @@ AuraStore is a frontend-only e-commerce application that demonstrates real-world
 - **Hover Effects** and interactive elements
 - **Subtle Scrollbar Styling** - Non-intrusive design
 
+## Images
+
+<img width="1920" height="1682" alt="screencapture-localhost-5173-2025-12-13-18_27_08" src="https://github.com/user-attachments/assets/666985b1-4b24-4588-9b28-81b72774e4e4" />
+
+<img width="421" height="458" alt="Screenshot 2025-12-13 182907" src="https://github.com/user-attachments/assets/e043c235-2213-4d9a-8c04-4d16467ab257" />
+
+<img width="1897" height="896" alt="Screenshot 2025-12-13 183503" src="https://github.com/user-attachments/assets/efb5b02a-6d51-4c37-890a-51d00853343b" />
+
+<img width="1893" height="840" alt="Screenshot 2025-12-13 183555" src="https://github.com/user-attachments/assets/98ade490-2bc1-4b3d-803d-0ebd227b144b" />
+
+<img width="1899" height="894" alt="Screenshot 2025-12-13 183537" src="https://github.com/user-attachments/assets/17ed86f0-157d-48bb-933f-6bb422765d5d" />
+
+<img width="1895" height="900" alt="Screenshot 2025-12-13 183128" src="https://github.com/user-attachments/assets/6310d753-0b62-4e91-b5ca-66f2636de077" />
+
+<img width="1919" height="902" alt="Screenshot 2025-12-13 183250" src="https://github.com/user-attachments/assets/24eb43e0-633b-4e76-bdf6-5eaa68e94819" />
+
+<img width="1919" height="902" alt="Screenshot 2025-12-13 183310" src="https://github.com/user-attachments/assets/0699b71c-ff86-4f6b-9170-452513f24a32" />
+
+<img width="1919" height="909" alt="Screenshot 2025-12-13 183338" src="https://github.com/user-attachments/assets/31d07651-ff0f-4f1f-bf87-7f08074d202d" />
+
+<img width="1899" height="900" alt="Screenshot 2025-12-13 183359" src="https://github.com/user-attachments/assets/0cc1887f-1af2-4cbd-b774-676f3bd1ff7e" />
+
+
 ## 🏗️ Project Structure
 
 ```
