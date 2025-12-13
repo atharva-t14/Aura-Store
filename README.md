@@ -176,7 +176,7 @@ src/
 
 ```bash
 # Clone the repository
-git clone <repository-url>
+git clone https://github.com/atharva-t14/Aura-Store.git
 cd ecom_ui_v2
 
 # Install dependencies
