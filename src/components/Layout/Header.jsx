@@ -16,7 +16,7 @@ export default function Header() {
         localStorage.setItem('theme', theme)
     }, [theme])
     return (
-        <header className="fixed top-0 left-0 right-0 h-16 bg-[var(--bg-surface)] border-b border-[var(--bg-muted)]/70 backdrop-blur z-50">
+        <header className="fixed top-0 left-0 right-0 h-16 bg-[var(--bg-surface-solid)]/95 border-b border-[var(--border-subtle)] backdrop-blur-lg shadow-[var(--shadow-sm)] z-50">
             <div className="container-max h-full flex items-center justify-between">
                 <Link to="/" className="flex items-center gap-2 font-semibold text-xl text-[var(--text-primary)]">
                     <span className="text-brand">Ecom</span>
@@ -33,11 +33,11 @@ export default function Header() {
                 <nav className="flex items-center gap-4 text-[var(--text-muted)]">
                     <button
                         aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-                        className="p-2 rounded-md bg-[var(--bg-muted)] hover:bg-[var(--bg-base)] text-[var(--text-primary)] border border-[var(--bg-muted)]"
+                        className="p-2 rounded-md bg-gradient-to-br from-[var(--bg-accent)] to-[var(--bg-muted)] hover:shadow-[var(--shadow-sm)] text-[var(--text-primary)] border border-[var(--border-subtle)] transition-all"
                         onClick={() => setTheme(prev => (prev === 'dark' ? 'light' : 'dark'))}
                         title={theme === 'dark' ? 'Light mode' : 'Dark mode'}
                     >
-                        {theme === 'dark' ? <FaSun className="text-lg" /> : <FaMoon className="text-lg" />}
+                        {theme === 'dark' ? <FaSun className="text-lg text-brand" /> : <FaMoon className="text-lg text-brand-dark" />}
                     </button>
                     <Link to="/products" className="text-sm font-medium hover:text-brand">Products</Link>
                     <Link to="/cart" className="relative">

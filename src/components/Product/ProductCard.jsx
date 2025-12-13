@@ -8,16 +8,16 @@ export default function ProductCard({ product }) {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
-    const cardBase = 'bg-[var(--bg-surface)] border border-[var(--bg-muted)] shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-transform'
-    const thumbBg = 'bg-gradient-to-br from-brand/12 via-amber-300/10 to-brand/8'
+    const cardBase = 'bg-[var(--bg-surface-solid)] border border-[var(--border-subtle)] hover:border-brand/30 hover:shadow-[var(--shadow-md)] hover:-translate-y-1 transition-all duration-300'
+    const thumbBg = 'bg-gradient-to-br from-[var(--bg-accent)] via-amber-300/8 to-brand/6 backdrop-blur-sm'
     const titleColor = 'text-[var(--text-primary)]'
     const descColor = 'text-[var(--text-muted)]'
     const priceColor = 'text-[var(--text-primary)]'
-    const ratingBg = 'bg-amber-100 text-amber-800'
-    const ratingIcon = 'text-amber-500'
-    const primaryBtn = 'bg-brand hover:bg-brand-dark'
-    const borderTone = 'border-[var(--bg-muted)]'
-    const overlayBg = 'bg-[var(--bg-surface)]'
+    const ratingBg = 'bg-gradient-to-br from-brand/20 to-amber-500/15 text-brand border border-brand/20'
+    const ratingIcon = 'text-brand'
+    const primaryBtn = 'bg-gradient-to-r from-brand to-brand-dark hover:shadow-[0_0_20px_var(--brand-glow)] transition-all'
+    const borderTone = 'border-[var(--border-subtle)]'
+    const overlayBg = 'bg-gradient-to-b from-[var(--bg-surface-solid)] to-[var(--bg-base-secondary)] backdrop-blur-xl'
 
     const handleAddToCart = (e) => {
         e.stopPropagation()

@@ -31,7 +31,7 @@ export default function Cart() {
 
     if (items.length === 0) {
         return (
-            <div className="bg-[var(--bg-surface)] rounded-xl shadow-sm border border-[var(--bg-muted)] p-8 text-center space-y-4">
+            <div className="bg-gradient-to-br from-[var(--bg-surface-solid)] to-[var(--bg-base-secondary)] rounded-xl shadow-[var(--shadow-md)] border border-[var(--border-subtle)] p-8 text-center space-y-4">
                 <p className="text-lg font-semibold text-[var(--text-primary)]">Your cart is empty</p>
                 <p className="text-sm text-[var(--text-muted)]">Add items to enjoy a seamless checkout experience.</p>
                 <button
@@ -46,10 +46,10 @@ export default function Cart() {
 
     return (
         <div className="grid lg:grid-cols-[2fr_1fr] gap-6">
-            <div className="bg-[var(--bg-surface)] rounded-xl shadow-sm border border-[var(--bg-muted)] divide-y divide-[var(--bg-muted)]">
+            <div className="bg-gradient-to-br from-[var(--bg-surface-solid)] to-[var(--bg-base-secondary)] rounded-xl shadow-[var(--shadow-md)] border border-[var(--border-subtle)] divide-y divide-[var(--border-subtle)]">
                 {items.map(item => (
                     <div key={item.id} className="p-4 flex gap-4">
-                        <div className="w-24 h-24 rounded-lg bg-[var(--bg-muted)] border border-[var(--bg-muted)] flex items-center justify-center overflow-hidden">
+                        <div className="w-24 h-24 rounded-lg bg-gradient-to-br from-[var(--bg-accent)] to-[var(--bg-muted)] border border-[var(--border-subtle)] flex items-center justify-center overflow-hidden">
                             <img src={item.image} alt={item.title} className="w-full h-full object-contain" loading="lazy" />
                         </div>
                         <div className="flex-1 min-w-0">
@@ -81,7 +81,7 @@ export default function Cart() {
                 ))}
             </div>
 
-            <aside className="bg-[var(--bg-surface)] rounded-xl shadow-sm border border-[var(--bg-muted)] p-6 space-y-4 h-fit sticky top-20">
+            <aside className="bg-gradient-to-br from-[var(--bg-surface-solid)] to-[var(--bg-base-secondary)] rounded-xl shadow-[var(--shadow-md)] border border-[var(--border-subtle)] p-6 space-y-4 h-fit sticky top-20">
                 <div className="flex items-center justify-between">
                     <h4 className="text-lg font-semibold text-[var(--text-primary)]">Order Summary</h4>
                     <span className="text-sm text-[var(--text-muted)]">{totalItems} item(s)</span>
@@ -101,7 +101,7 @@ export default function Cart() {
                     <span className="text-xl font-bold text-[var(--text-primary)]">₹{grandTotal.toFixed(0)}</span>
                 </div>
                 <button
-                    className="w-full bg-brand text-[var(--bg-base)] rounded-lg py-2.5 font-semibold hover:bg-brand-dark"
+                    className="w-full bg-gradient-to-r from-brand to-brand-dark text-white rounded-lg py-2.5 font-semibold hover:shadow-[0_0_20px_var(--brand-glow)] transition-all"
                     onClick={() => navigate('/checkout')}
                 >
                     Proceed to Checkout
@@ -110,7 +110,7 @@ export default function Cart() {
 
             {/* Recommendations */}
             {recommendations.length > 0 && (
-                <div className="lg:col-span-2 bg-[var(--bg-surface)] rounded-xl shadow-sm border border-[var(--bg-muted)] p-6 space-y-4 text-[var(--text-primary)]">
+                <div className="lg:col-span-2 bg-gradient-to-br from-[var(--bg-surface-solid)] to-[var(--bg-base-secondary)] rounded-xl shadow-[var(--shadow-md)] border border-[var(--border-subtle)] p-6 space-y-4 text-[var(--text-primary)]">
                     <div className="flex items-center justify-between">
                         <h3 className="text-lg font-semibold">Users also bought</h3>
                         <button className="text-sm text-brand hover:text-brand-dark hover:underline" onClick={() => navigate('/products')}>

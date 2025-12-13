@@ -57,7 +57,7 @@ export default function Home() {
     return (
         <div className="space-y-6">
             {/* Hero Section */}
-            <div className="bg-[var(--bg-surface)] border border-[var(--bg-muted)] rounded-xl shadow-sm overflow-hidden">
+            <div className="bg-gradient-to-br from-[var(--bg-surface-solid)] to-[var(--bg-base-secondary)] border border-[var(--border-subtle)] rounded-xl shadow-[var(--shadow-md)] overflow-hidden">
                 <div
                     className="relative h-80 md:h-96 flex flex-col justify-center p-8 md:p-14 bg-cover bg-center transition-all duration-1000"
                     style={{
@@ -75,7 +75,7 @@ export default function Home() {
                         <h1 className="text-3xl md:text-5xl font-extrabold text-white">Shop the latest styles</h1>
                         <p className="mt-3 text-gray-300 max-w-2xl">Discover curated collections crafted for every lifestyle and occasion.</p>
                         <div className="mt-6 flex gap-3">
-                            <Link to="/products" className="bg-brand text-[var(--bg-base)] font-semibold px-5 py-2 rounded hover:bg-brand-dark transition">Shop Now</Link>
+                            <Link to="/products" className="bg-gradient-to-r from-brand to-brand-dark text-white font-semibold px-5 py-2 rounded hover:shadow-[0_0_20px_var(--brand-glow)] transition-all">Shop Now</Link>
                             {!user && <Link to="/login" className="border border-white text-white font-semibold px-5 py-2 rounded hover:bg-white/10 transition">Login</Link>}
                         </div>
                     </div>
@@ -105,7 +105,7 @@ export default function Home() {
                             <Link
                                 key={category}
                                 to={`/products?category=${encodeURIComponent(category)}`}
-                                className="group bg-[var(--bg-surface)] border border-[var(--bg-muted)] rounded-lg shadow-sm hover:shadow-lg transition overflow-hidden"
+                                className="group bg-gradient-to-br from-[var(--bg-surface-solid)] to-[var(--bg-accent)] border border-[var(--border-subtle)] rounded-lg shadow-[var(--shadow-sm)] hover:shadow-[var(--shadow-md)] hover:border-brand/30 transition-all overflow-hidden"
                             >
                                 <div className={`bg-gradient-to-br ${gradient} p-6 flex items-center justify-center`}>
                                     <Icon className="text-4xl md:text-5xl text-[var(--bg-base)] group-hover:scale-110 transition" />
@@ -120,18 +120,18 @@ export default function Home() {
             </div>
 
             {/* Features */}
-            <div className="bg-[var(--bg-surface)] border border-[var(--bg-muted)] rounded-lg shadow-sm p-6">
+            <div className="bg-gradient-to-br from-[var(--bg-surface-solid)] to-[var(--bg-base-secondary)] border border-[var(--border-subtle)] rounded-xl shadow-[var(--shadow-md)] p-6">
                 <h2 className="text-2xl font-bold mb-4 text-[var(--text-primary)]">Why Shop With Us</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    <div className="p-4 rounded-lg border border-[var(--bg-muted)] bg-[var(--bg-base)]/40">
+                    <div className="p-4 rounded-lg border border-[var(--border-subtle)] bg-gradient-to-br from-[var(--bg-accent)] to-transparent hover:shadow-[var(--shadow-sm)] transition-all">
                         <h3 className="font-semibold text-[var(--text-primary)]">Fast</h3>
                         <p className="text-sm text-[var(--text-muted)]">Lightning-fast product browsing with smooth transitions.</p>
                     </div>
-                    <div className="p-4 rounded-lg border border-[var(--bg-muted)] bg-[var(--bg-base)]/40">
+                    <div className="p-4 rounded-lg border border-[var(--border-subtle)] bg-gradient-to-br from-[var(--bg-accent)] to-transparent hover:shadow-[var(--shadow-sm)] transition-all">
                         <h3 className="font-semibold text-[var(--text-primary)]">Secure</h3>
                         <p className="text-sm text-[var(--text-muted)]">Protected routes and persisted cart & auth state.</p>
                     </div>
-                    <div className="p-4 rounded-lg border border-[var(--bg-muted)] bg-[var(--bg-base)]/40">
+                    <div className="p-4 rounded-lg border border-[var(--border-subtle)] bg-gradient-to-br from-[var(--bg-accent)] to-transparent hover:shadow-[var(--shadow-sm)] transition-all">
                         <h3 className="font-semibold text-[var(--text-primary)]">Responsive</h3>
                         <p className="text-sm text-[var(--text-muted)]">Looks great on mobile and desktop.</p>
                     </div>

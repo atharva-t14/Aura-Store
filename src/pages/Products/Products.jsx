@@ -116,7 +116,7 @@ export default function Products() {
     return (
         <div className="flex gap-6 bg-[var(--bg-base)] min-h-screen p-4 md:p-6 rounded-lg">
             {/* Sidebar Filters */}
-            <aside className={`fixed lg:static inset-0 lg:inset-auto w-64 bg-[var(--bg-surface)] border border-[var(--bg-muted)] rounded-xl shadow-sm p-4 h-screen lg:h-fit lg:sticky top-20 lg:top-20 z-40 lg:z-auto transform transition-transform duration-300 overflow-y-auto lg:overflow-y-visible ${showMobileSidebar ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
+            <aside className={`fixed lg:static inset-0 lg:inset-auto w-64 bg-gradient-to-b from-[var(--bg-surface-solid)] to-[var(--bg-base-secondary)] border border-[var(--border-subtle)] rounded-xl shadow-[var(--shadow-md)] p-4 h-screen lg:h-fit lg:sticky top-20 lg:top-20 z-40 lg:z-auto transform transition-transform duration-300 overflow-y-auto lg:overflow-y-visible ${showMobileSidebar ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
                 <div className="flex items-start justify-between mb-4">
                     <h3 className="font-semibold text-lg text-[var(--text-primary)]">Filters</h3>
                     <button className="lg:hidden text-[var(--text-primary)] hover:text-brand" onClick={closeMobileSidebar}>
@@ -252,9 +252,9 @@ export default function Products() {
                 <div className="lg:hidden flex items-center gap-3 mb-4">
                     <button
                         onClick={() => setShowMobileSidebar(true)}
-                        className="flex items-center gap-2 bg-[var(--bg-surface)] border border-[var(--bg-muted)] rounded-lg px-4 py-2.5 text-sm font-medium text-[var(--text-primary)] hover:bg-[var(--bg-muted)] transition"
+                        className="flex items-center gap-2 bg-gradient-to-br from-[var(--bg-surface-solid)] to-[var(--bg-accent)] border border-[var(--border-subtle)] rounded-lg px-4 py-2.5 text-sm font-medium text-[var(--text-primary)] hover:shadow-[var(--shadow-sm)] hover:border-brand/30 transition-all"
                     >
-                        <FaFilter />
+                        <FaFilter className="text-brand" />
                         Filters
                     </button>
                     <input
