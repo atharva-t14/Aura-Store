@@ -19,8 +19,8 @@ export default function Header() {
         <header className="fixed top-0 left-0 right-0 h-16 bg-[var(--bg-surface-solid)]/95 border-b border-[var(--border-subtle)] backdrop-blur-lg shadow-[var(--shadow-sm)] z-50">
             <div className="container-max h-full flex items-center justify-between">
                 <Link to="/" className="flex items-center gap-2 font-semibold text-xl text-[var(--text-primary)]">
-                    <span className="text-brand">Ecom</span>
-                    <span className="hidden sm:inline text-[var(--text-muted)]">Shop</span>
+                    <span className="text-brand">Aura</span>
+                    <span className="hidden sm:inline text-[var(--text-muted)]">Store</span>
                 </Link>
                 <div className="flex-1 px-4 max-w-md hidden sm:block">
                     <input
