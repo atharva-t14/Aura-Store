@@ -1,4 +1,4 @@
-# AuraStore - Premium E-commerce Platform (Live Project Link: https://aura-store-git-main-atharvatamhankar11-gmailcoms-projects.vercel.app )
+# AuraStore - E-commerce Platform (Live Project Link: https://aura-store-git-main-atharvatamhankar11-gmailcoms-projects.vercel.app )
 
 A modern, feature-rich e-commerce application built with React, Redux, and Tailwind CSS. AuraStore delivers a seamless shopping experience with advanced filtering, cart management, and a sophisticated checkout workflow.
 
