@@ -75,9 +75,13 @@ AuraStore is a frontend-only e-commerce application that demonstrates real-world
 
 ## Images
 
+**Dark Mode**
+
 <img width="1920" height="1682" alt="screencapture-localhost-5173-2025-12-13-18_27_08" src="https://github.com/user-attachments/assets/666985b1-4b24-4588-9b28-81b72774e4e4" />
 
 <img width="1898" height="908" alt="Screenshot 2025-12-13 183011" src="https://github.com/user-attachments/assets/bb37bc8a-76ba-4510-9d97-d710f2ed7449" />
+
+<img width="1892" height="900" alt="image" src="https://github.com/user-attachments/assets/1ba07ea8-e59e-4e84-b447-97104ce442d3" />
 
 <img width="1897" height="896" alt="Screenshot 2025-12-13 183503" src="https://github.com/user-attachments/assets/efb5b02a-6d51-4c37-890a-51d00853343b" />
 
@@ -101,7 +105,7 @@ AuraStore is a frontend-only e-commerce application that demonstrates real-world
 
 
 
-Light Mode
+**Light Mode**
 
 <img width="1920" height="1682" alt="screencapture-localhost-5173-2025-12-13-18_26_39" src="https://github.com/user-attachments/assets/3c1bb8c3-9632-480b-8528-4b23a3cf71bc" />
 
