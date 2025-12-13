@@ -30,11 +30,11 @@ export default function Cart() {
 
     if (items.length === 0) {
         return (
-            <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-8 text-center space-y-4">
-                <p className="text-lg font-semibold text-gray-900">Your cart is empty</p>
-                <p className="text-sm text-gray-600">Add items to enjoy a seamless checkout experience.</p>
+            <div className="bg-[var(--bg-surface)] rounded-xl shadow-sm border border-[var(--bg-muted)] p-8 text-center space-y-4">
+                <p className="text-lg font-semibold text-[var(--text-primary)]">Your cart is empty</p>
+                <p className="text-sm text-[var(--text-muted)]">Add items to enjoy a seamless checkout experience.</p>
                 <button
-                    className="inline-flex items-center gap-2 bg-brand text-white px-5 py-2.5 rounded-lg font-semibold hover:bg-brand-dark"
+                    className="inline-flex items-center gap-2 bg-brand text-[var(--bg-base)] px-5 py-2.5 rounded-lg font-semibold hover:bg-brand-dark"
                     onClick={() => navigate('/products')}
                 >
                     <FaShoppingCart /> Start Shopping
@@ -45,23 +45,23 @@ export default function Cart() {
 
     return (
         <div className="grid lg:grid-cols-[2fr_1fr] gap-6">
-            <div className="bg-white rounded-xl shadow-sm border border-gray-100 divide-y">
+            <div className="bg-[var(--bg-surface)] rounded-xl shadow-sm border border-[var(--bg-muted)] divide-y divide-[var(--bg-muted)]">
                 {items.map(item => (
                     <div key={item.id} className="p-4 flex gap-4">
-                        <div className="w-24 h-24 rounded-lg bg-gray-50 border border-gray-100 flex items-center justify-center overflow-hidden">
+                        <div className="w-24 h-24 rounded-lg bg-[var(--bg-muted)] border border-[var(--bg-muted)] flex items-center justify-center overflow-hidden">
                             <img src={item.image} alt={item.title} className="w-full h-full object-contain" />
                         </div>
                         <div className="flex-1 min-w-0">
-                            <h3 className="font-semibold text-gray-900 line-clamp-2">{item.title}</h3>
-                            <p className="text-sm text-gray-500 mt-1">₹{(item.price * 83).toFixed(0)} each</p>
+                            <h3 className="font-semibold text-[var(--text-primary)] line-clamp-2">{item.title}</h3>
+                            <p className="text-sm text-[var(--text-muted)] mt-1">₹{(item.price * 83).toFixed(0)} each</p>
                             <div className="flex items-center gap-3 mt-3">
-                                <div className="flex items-center rounded-lg border border-gray-200 overflow-hidden">
-                                    <button className="px-3 py-2 hover:bg-gray-50" onClick={() => dispatch(decreaseQty(item.id))}><FaMinus /></button>
-                                    <span className="px-4 py-2 font-semibold">{item.qty}</span>
-                                    <button className="px-3 py-2 hover:bg-gray-50" onClick={() => dispatch(increaseQty(item.id))}><FaPlus /></button>
+                                <div className="flex items-center rounded-lg border border-[var(--bg-muted)] overflow-hidden">
+                                    <button className="px-3 py-2 hover:bg-[var(--bg-muted)]" onClick={() => dispatch(decreaseQty(item.id))}><FaMinus /></button>
+                                    <span className="px-4 py-2 font-semibold text-[var(--text-primary)]">{item.qty}</span>
+                                    <button className="px-3 py-2 hover:bg-[var(--bg-muted)]" onClick={() => dispatch(increaseQty(item.id))}><FaPlus /></button>
                                 </div>
-                                <p className="font-semibold text-gray-900">₹{(item.price * 83 * item.qty).toFixed(0)}</p>
-                                <button className="text-red-600 text-sm inline-flex items-center gap-1" onClick={() => dispatch(removeFromCart(item.id))}>
+                                <p className="font-semibold text-[var(--text-primary)]">₹{(item.price * 83 * item.qty).toFixed(0)}</p>
+                                <button className="text-red-400 hover:text-red-300 text-sm inline-flex items-center gap-1" onClick={() => dispatch(removeFromCart(item.id))}>
                                     <FaTrash /> Remove
                                 </button>
                             </div>
@@ -70,27 +70,27 @@ export default function Cart() {
                 ))}
             </div>
 
-            <aside className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 space-y-4 h-fit sticky top-20">
+            <aside className="bg-[var(--bg-surface)] rounded-xl shadow-sm border border-[var(--bg-muted)] p-6 space-y-4 h-fit sticky top-20">
                 <div className="flex items-center justify-between">
-                    <h4 className="text-lg font-semibold">Order Summary</h4>
-                    <span className="text-sm text-gray-500">{totalItems} item(s)</span>
+                    <h4 className="text-lg font-semibold text-[var(--text-primary)]">Order Summary</h4>
+                    <span className="text-sm text-[var(--text-muted)]">{totalItems} item(s)</span>
                 </div>
-                <div className="space-y-2 text-sm text-gray-700">
+                <div className="space-y-2 text-sm text-[var(--text-muted)]">
                     <div className="flex justify-between">
                         <span>Subtotal</span>
-                        <span>₹{subtotal.toFixed(0)}</span>
+                        <span className="text-[var(--text-primary)]">₹{subtotal.toFixed(0)}</span>
                     </div>
                     <div className="flex justify-between">
                         <span>Shipping</span>
-                        <span className="text-green-600">{shipping === 0 ? 'Free' : `₹${shipping}`}</span>
+                        <span className="text-amber-300">{shipping === 0 ? 'Free' : `₹${shipping}`}</span>
                     </div>
                 </div>
-                <div className="flex justify-between items-center pt-2 border-t border-gray-100">
-                    <span className="text-sm font-semibold text-gray-900">Total</span>
-                    <span className="text-xl font-bold text-gray-900">₹{grandTotal.toFixed(0)}</span>
+                <div className="flex justify-between items-center pt-2 border-t border-[var(--bg-muted)]">
+                    <span className="text-sm font-semibold text-[var(--text-primary)]">Total</span>
+                    <span className="text-xl font-bold text-[var(--text-primary)]">₹{grandTotal.toFixed(0)}</span>
                 </div>
                 <button
-                    className="w-full bg-brand text-white rounded-lg py-2.5 font-semibold hover:bg-brand-dark"
+                    className="w-full bg-brand text-[var(--bg-base)] rounded-lg py-2.5 font-semibold hover:bg-brand-dark"
                     onClick={() => navigate('/checkout')}
                 >
                     Proceed to Checkout
@@ -99,23 +99,23 @@ export default function Cart() {
 
             {/* Recommendations */}
             {recommendations.length > 0 && (
-                <div className="lg:col-span-2 bg-white rounded-xl shadow-sm border border-gray-100 p-6 space-y-4">
+                <div className="lg:col-span-2 bg-[var(--bg-surface)] rounded-xl shadow-sm border border-[var(--bg-muted)] p-6 space-y-4 text-[var(--text-primary)]">
                     <div className="flex items-center justify-between">
                         <h3 className="text-lg font-semibold">Users also bought</h3>
-                        <button className="text-sm text-brand hover:underline" onClick={() => navigate('/products')}>
+                        <button className="text-sm text-brand hover:text-brand-dark hover:underline" onClick={() => navigate('/products')}>
                             Browse more
                         </button>
                     </div>
                     <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
                         {recommendations.map(p => (
-                            <div key={p.id} className="border border-gray-100 rounded-lg p-3 hover:shadow-md transition">
-                                <div className="h-32 bg-gray-50 rounded flex items-center justify-center overflow-hidden mb-3">
+                            <div key={p.id} className="border border-[var(--bg-muted)] bg-[var(--bg-base)]/60 rounded-lg p-3 hover:border-brand/60 transition">
+                                <div className="h-32 bg-[var(--bg-base)] rounded flex items-center justify-center overflow-hidden mb-3 border border-[var(--bg-muted)]">
                                     <img src={p.image} alt={p.title} className="h-full object-contain" />
                                 </div>
-                                <p className="text-sm font-semibold text-gray-900 line-clamp-2">{p.title}</p>
-                                <p className="text-xs text-gray-500 mt-1">₹{(p.price * 83).toFixed(0)}</p>
+                                <p className="text-sm font-semibold text-[var(--text-primary)] line-clamp-2">{p.title}</p>
+                                <p className="text-xs text-[var(--text-muted)] mt-1">₹{(p.price * 83).toFixed(0)}</p>
                                 <button
-                                    className="mt-3 w-full inline-flex items-center justify-center gap-2 bg-gray-900 text-white rounded-lg py-2 text-sm font-semibold hover:bg-gray-800"
+                                    className="mt-3 w-full inline-flex items-center justify-center gap-2 bg-brand text-[var(--bg-base)] rounded-lg py-2 text-sm font-semibold hover:bg-brand-dark"
                                     onClick={() => dispatch(addToCart({
                                         id: p.id,
                                         title: p.title,

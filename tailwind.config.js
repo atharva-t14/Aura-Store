@@ -5,8 +5,8 @@ export default {
         extend: {
             colors: {
                 brand: {
-                    DEFAULT: "#2563eb",
-                    dark: "#1e40af",
+                    DEFAULT: "#F7A620",
+                    dark: "#C07C32",
                 },
             },
         },

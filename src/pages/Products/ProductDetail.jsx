@@ -46,11 +46,11 @@ export default function ProductDetail() {
 
         for (let i = 0; i < 5; i++) {
             if (i < fullStars) {
-                stars.push(<FaStar key={i} className="text-yellow-400" />)
+                stars.push(<FaStar key={i} className="text-brand" />)
             } else if (i === fullStars && hasHalfStar) {
-                stars.push(<FaStarHalfAlt key={i} className="text-yellow-400" />)
+                stars.push(<FaStarHalfAlt key={i} className="text-brand" />)
             } else {
-                stars.push(<FaRegStar key={i} className="text-gray-300" />)
+                stars.push(<FaRegStar key={i} className="text-[var(--bg-muted)]" />)
             }
         }
         return stars
@@ -104,13 +104,13 @@ export default function ProductDetail() {
 
     if (!product) {
         return (
-            <div className="bg-white rounded-lg shadow p-6">
+            <div className="bg-[var(--bg-surface)] border border-[var(--bg-muted)] rounded-lg shadow p-6">
                 <div className="animate-pulse grid md:grid-cols-2 gap-6">
-                    <div className="aspect-square bg-gray-200 rounded" />
+                    <div className="aspect-square bg-[var(--bg-muted)] rounded" />
                     <div className="space-y-4">
-                        <div className="h-8 bg-gray-200 rounded w-3/4" />
-                        <div className="h-4 bg-gray-200 rounded" />
-                        <div className="h-4 bg-gray-200 rounded w-5/6" />
+                        <div className="h-8 bg-[var(--bg-muted)] rounded w-3/4" />
+                        <div className="h-4 bg-[var(--bg-muted)] rounded" />
+                        <div className="h-4 bg-[var(--bg-muted)] rounded w-5/6" />
                     </div>
                 </div>
             </div>
@@ -118,13 +118,13 @@ export default function ProductDetail() {
     }
 
     return (
-        <div className="bg-white rounded-lg shadow overflow-hidden">
+        <div className="bg-[var(--bg-surface)] border border-[var(--bg-muted)] rounded-lg shadow overflow-hidden text-[var(--text-primary)]">
             <div className="p-6 grid md:grid-cols-2 gap-8">
                 {/* Image Gallery */}
                 <div>
                     <div
                         ref={imageRef}
-                        className="relative aspect-square bg-gray-50 rounded-lg flex items-center justify-center overflow-visible group cursor-crosshair"
+                        className="relative aspect-square bg-[var(--bg-base)] rounded-lg flex items-center justify-center overflow-visible group cursor-crosshair border border-[var(--bg-muted)]"
                         onMouseEnter={() => setShowZoom(true)}
                         onMouseLeave={() => setShowZoom(false)}
                         onMouseMove={(e) => {
@@ -144,7 +144,7 @@ export default function ProductDetail() {
                         {/* Lens overlay */}
                         {showZoom && (
                             <div
-                                className="absolute pointer-events-none border-2 border-brand/60 bg-white/40 rounded"
+                                className="absolute pointer-events-none border-2 border-brand/70 bg-[var(--bg-base)]/40 rounded"
                                 style={lensStyle}
                             />
                         )}
@@ -152,7 +152,7 @@ export default function ProductDetail() {
                         {/* Zoom window */}
                         {showZoom && imageRef.current && (
                             <div
-                                className="hidden md:block absolute top-2 left-full ml-4 w-64 h-64 border rounded-lg overflow-hidden shadow-lg bg-white z-20"
+                                className="hidden md:block absolute top-2 left-full ml-4 w-64 h-64 border border-[var(--bg-muted)] rounded-lg overflow-hidden shadow-lg bg-[var(--bg-base)] z-20"
                                 style={zoomWindowStyle}
                             />
                         )}
@@ -165,7 +165,7 @@ export default function ProductDetail() {
                                 <button
                                     key={i}
                                     onClick={() => setSelectedImage(i)}
-                                    className={`aspect-square border-2 rounded-lg overflow-hidden transition ${selectedImage === i ? 'border-brand' : 'border-gray-200 hover:border-gray-300'
+                                    className={`aspect-square border-2 rounded-lg overflow-hidden transition ${selectedImage === i ? 'border-brand' : 'border-[var(--bg-muted)] hover:border-brand/60'
                                         }`}
                                 >
                                     <img src={img} alt={`${product.title} ${i + 1}`} className="w-full h-full object-contain" />
@@ -178,7 +178,7 @@ export default function ProductDetail() {
                 {/* Product Info */}
                 <div className="flex flex-col">
                     <div className="flex-1">
-                        <h1 className="text-3xl font-bold text-gray-900">{product.title}</h1>
+                        <h1 className="text-3xl font-bold text-[var(--text-primary)]">{product.title}</h1>
 
                         {/* Category */}
                         <p className="text-sm text-brand font-medium mt-2 uppercase">{product.category}</p>
@@ -188,39 +188,39 @@ export default function ProductDetail() {
                             <div className="flex gap-1">
                                 {renderStars(product.rating)}
                             </div>
-                            <span className="text-sm text-gray-600">
+                            <span className="text-sm text-[var(--text-muted)]">
                                 {product.rating.toFixed(1)} ({product.ratingCount} reviews)
                             </span>
                         </div>
 
                         {/* Price */}
                         <div className="mt-4 flex items-baseline gap-3">
-                            <span className="text-4xl font-bold text-gray-900">₹{(product.price * 83).toFixed(0)}</span>
-                            <span className="text-lg text-gray-400 line-through">₹{(product.price * 83 * 1.2).toFixed(0)}</span>
-                            <span className="text-sm bg-green-100 text-green-700 px-2 py-1 rounded font-semibold">17% OFF</span>
+                            <span className="text-4xl font-bold text-[var(--text-primary)]">₹{(product.price * 83).toFixed(0)}</span>
+                            <span className="text-lg text-[var(--text-muted)] line-through">₹{(product.price * 83 * 1.2).toFixed(0)}</span>
+                            <span className="text-sm bg-emerald-500/15 text-emerald-200 px-2 py-1 rounded font-semibold">17% OFF</span>
                         </div>
 
                         {/* Description */}
                         <div className="mt-6">
-                            <h3 className="font-semibold text-gray-900 mb-2">Product Details</h3>
-                            <p className="text-gray-600 leading-relaxed">{product.description}</p>
+                            <h3 className="font-semibold text-[var(--text-primary)] mb-2">Product Details</h3>
+                            <p className="text-[var(--text-muted)] leading-relaxed">{product.description}</p>
                         </div>
                     </div>
 
                     {/* Add to Cart Section */}
-                    <div className="mt-6 border-t pt-6">
+                    <div className="mt-6 border-t border-[var(--bg-muted)] pt-6">
                         <div className="flex items-center gap-4 mb-4">
                             <label className="text-sm font-medium">Quantity</label>
-                            <div className="flex items-center border-2 border-gray-300 rounded-lg overflow-hidden">
+                            <div className="flex items-center border-2 border-[var(--bg-muted)] rounded-lg overflow-hidden bg-[var(--bg-base)]">
                                 <button
-                                    className="px-4 py-2 hover:bg-gray-100 transition font-semibold"
+                                    className="px-4 py-2 hover:bg-[var(--bg-muted)]/60 transition font-semibold"
                                     onClick={() => setQty(q => Math.max(1, q - 1))}
                                 >
                                     -
                                 </button>
-                                <span className="px-6 py-2 border-x-2 border-gray-300 font-semibold">{qty}</span>
+                                <span className="px-6 py-2 border-x-2 border-[var(--bg-muted)] font-semibold">{qty}</span>
                                 <button
-                                    className="px-4 py-2 hover:bg-gray-100 transition font-semibold"
+                                    className="px-4 py-2 hover:bg-[var(--bg-muted)]/60 transition font-semibold"
                                     onClick={() => setQty(q => q + 1)}
                                 >
                                     +
@@ -248,7 +248,7 @@ export default function ProductDetail() {
             </div>
 
             {/* Reviews Section */}
-            <div className="border-t p-6">
+            <div className="border-t border-[var(--bg-muted)] p-6">
                 <div className="flex items-center justify-between mb-6">
                     <h2 className="text-2xl font-bold">Customer Reviews</h2>
                     <button
@@ -261,7 +261,7 @@ export default function ProductDetail() {
 
                 {/* Review Form */}
                 {showReviewForm && (
-                    <div className="bg-gray-50 rounded-lg p-6 mb-6">
+                    <div className="bg-[var(--bg-base)]/50 border border-[var(--bg-muted)] rounded-lg p-6 mb-6">
                         <h3 className="font-semibold mb-4">Submit Your Review</h3>
                         <form onSubmit={handleSubmitReview}>
                             <div className="mb-4">
@@ -275,7 +275,7 @@ export default function ProductDetail() {
                                             className="focus:outline-none transition"
                                         >
                                             <FaStar
-                                                className={`text-3xl ${star <= newReview.rating ? 'text-yellow-400' : 'text-gray-300'}`}
+                                                className={`text-3xl ${star <= newReview.rating ? 'text-brand' : 'text-[var(--bg-muted)]'}`}
                                             />
                                         </button>
                                     ))}
@@ -287,7 +287,7 @@ export default function ProductDetail() {
                                     value={newReview.comment}
                                     onChange={(e) => setNewReview({ ...newReview, comment: e.target.value })}
                                     placeholder="Share your thoughts about this product..."
-                                    className="w-full border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand"
+                                    className="w-full border border-[var(--bg-muted)] bg-[var(--bg-base)] text-[var(--text-primary)] rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand"
                                     rows="4"
                                 />
                             </div>
@@ -304,12 +304,12 @@ export default function ProductDetail() {
                 {/* Reviews List */}
                 <div className="space-y-4">
                     {productReviews.length === 0 ? (
-                        <div className="text-center py-12 text-gray-500">
+                        <div className="text-center py-12 text-[var(--text-muted)]">
                             <p>No reviews yet. Be the first to review this product!</p>
                         </div>
                     ) : (
                         productReviews.map(review => (
-                            <div key={review.id} className="border rounded-lg p-4 hover:shadow-md transition">
+                            <div key={review.id} className="border border-[var(--bg-muted)] bg-[var(--bg-base)]/50 rounded-lg p-4 hover:border-brand/60 transition">
                                 <div className="flex items-start justify-between mb-2">
                                     <div className="flex items-center gap-3">
                                         <div className="w-10 h-10 bg-brand text-white rounded-full flex items-center justify-center">
@@ -317,14 +317,14 @@ export default function ProductDetail() {
                                         </div>
                                         <div>
                                             <p className="font-semibold">{review.userName}</p>
-                                            <p className="text-xs text-gray-500">{review.date}</p>
+                                            <p className="text-xs text-[var(--text-muted)]">{review.date}</p>
                                         </div>
                                     </div>
                                     <div className="flex gap-1">
                                         {renderStars(review.rating)}
                                     </div>
                                 </div>
-                                <p className="text-gray-700 mt-2">{review.comment}</p>
+                                <p className="text-[var(--text-primary)] mt-2">{review.comment}</p>
                             </div>
                         ))
                     )}

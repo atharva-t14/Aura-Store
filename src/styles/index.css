@@ -4,10 +4,19 @@
 
 :root {
     --header-height: 64px;
+    --bg-base: #0c0b10;
+    --bg-surface: #1d1b25;
+    --bg-muted: #2a2735;
+    --text-primary: #e9e1d8;
+    --text-muted: #c9c2b7;
+    --brand: #f7a620;
+    --brand-dark: #c07c32;
 }
 
 body {
-    @apply bg-gray-50 text-gray-900;
+    @apply antialiased;
+    background: var(--bg-base);
+    color: var(--text-primary);
 }
 
 .container-max {

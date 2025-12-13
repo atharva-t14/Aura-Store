@@ -41,14 +41,35 @@ export default function Login() {
     if (token) return <Navigate to="/products" replace />
 
     return (
-        <div className="max-w-md mx-auto bg-white rounded-lg shadow p-6">
-            <h2 className="text-2xl font-bold mb-4">Login</h2>
-            <form onSubmit={onSubmit} className="space-y-3">
-                <input className="w-full border rounded px-3 py-2" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
-                <input className="w-full border rounded px-3 py-2" type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
-                <button disabled={loading} className="w-full bg-brand text-white rounded py-2 disabled:opacity-60">{loading ? 'Logging in...' : 'Login'}</button>
-            </form>
-            <p className="text-sm mt-3">No account? <a href="/signup" className="text-brand">Sign up</a></p>
+        <div className="min-h-[70vh] flex items-center justify-center bg-gradient-to-br from-[var(--bg-base)] via-[var(--bg-surface)] to-[var(--bg-base)] text-[var(--text-primary)]">
+            <div className="w-full max-w-md bg-[var(--bg-surface)] border border-[var(--bg-muted)] rounded-xl shadow-xl p-6 sm:p-8 space-y-6">
+                <div className="space-y-1">
+                    <p className="text-sm uppercase tracking-[0.2em] text-[var(--text-muted)]">Welcome back</p>
+                    <h2 className="text-3xl font-bold">Login</h2>
+                </div>
+                <form onSubmit={onSubmit} className="space-y-4">
+                    <input
+                        className="w-full rounded-lg border border-[var(--bg-muted)] bg-[var(--bg-base)] text-[var(--text-primary)] placeholder:text-[var(--text-muted)] px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand/70 focus:border-brand"
+                        placeholder="Email"
+                        value={email}
+                        onChange={e => setEmail(e.target.value)}
+                    />
+                    <input
+                        className="w-full rounded-lg border border-[var(--bg-muted)] bg-[var(--bg-base)] text-[var(--text-primary)] placeholder:text-[var(--text-muted)] px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand/70 focus:border-brand"
+                        type="password"
+                        placeholder="Password"
+                        value={password}
+                        onChange={e => setPassword(e.target.value)}
+                    />
+                    <button
+                        disabled={loading}
+                        className="w-full bg-brand text-[var(--bg-base)] rounded-lg py-2.5 font-semibold hover:bg-brand-dark transition disabled:opacity-60"
+                    >
+                        {loading ? 'Logging in...' : 'Login'}
+                    </button>
+                </form>
+                <p className="text-sm text-[var(--text-muted)]">No account? <a href="/signup" className="text-brand hover:text-brand-dark">Sign up</a></p>
+            </div>
         </div>
     )
 }

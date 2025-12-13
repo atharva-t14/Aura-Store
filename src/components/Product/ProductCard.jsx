@@ -8,6 +8,17 @@ export default function ProductCard({ product }) {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
+    const cardBase = 'bg-[var(--bg-surface)] border border-[var(--bg-muted)] shadow-sm hover:shadow-lg'
+    const thumbBg = 'bg-[var(--bg-muted)]'
+    const titleColor = 'text-[var(--text-primary)]'
+    const descColor = 'text-[var(--text-muted)]'
+    const priceColor = 'text-[var(--text-primary)]'
+    const ratingBg = 'bg-amber-100 text-amber-800'
+    const ratingIcon = 'text-amber-500'
+    const primaryBtn = 'bg-brand hover:bg-brand-dark'
+    const borderTone = 'border-[var(--bg-muted)]'
+    const overlayBg = 'bg-[var(--bg-surface)]'
+
     const handleAddToCart = (e) => {
         e.stopPropagation()
         dispatch(addToCart({
@@ -23,36 +34,36 @@ export default function ProductCard({ product }) {
     return (
         <div
             onClick={() => navigate(`/products/${product.id}`)}
-            className="group relative bg-white rounded-lg shadow hover:shadow-xl transition overflow-hidden cursor-pointer"
+            className={`group relative rounded-lg transition overflow-hidden cursor-pointer ${cardBase}`}
         >
-            <div className="aspect-square bg-gray-50 flex items-center justify-center">
+            <div className={`aspect-square ${thumbBg} flex items-center justify-center`}>
                 <img src={product.image} alt={product.title} className="h-40 object-contain group-hover:scale-105 transition" />
             </div>
             <div className="p-3 space-y-1">
-                <h3 className="text-sm font-semibold line-clamp-2">{product.title}</h3>
-                <p className="text-xs text-gray-500 line-clamp-2">{product.description}</p>
+                <h3 className={`text-sm font-semibold line-clamp-2 ${titleColor}`}>{product.title}</h3>
+                <p className={`text-xs line-clamp-2 ${descColor}`}>{product.description}</p>
                 <div className="flex items-center justify-between">
-                    <span className="text-lg font-bold">₹{(product.price * 83).toFixed(0)}</span>
-                    <span className="text-xs bg-yellow-100 text-yellow-700 px-2 py-1 rounded flex items-center gap-1">
-                        <FaStar className="text-yellow-500" />
+                    <span className={`text-lg font-bold ${priceColor}`}>₹{(product.price * 83).toFixed(0)}</span>
+                    <span className={`text-xs px-2 py-1 rounded flex items-center gap-1 ${ratingBg}`}>
+                        <FaStar className={ratingIcon} />
                         {product.rating.toFixed(1)}
                     </span>
                 </div>
             </div>
 
             {/* Hover Quick View */}
-            <div className="absolute inset-0 lg:-inset-4 bg-white shadow-2xl border border-gray-100 backdrop-blur-sm opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition duration-200 flex flex-col gap-3 p-4 z-10">
-                <div className="w-full bg-gray-50 rounded-lg flex items-center justify-center py-6">
+            <div className={`absolute inset-0 lg:-inset-4 shadow-2xl backdrop-blur-sm opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition duration-200 flex flex-col gap-3 p-4 z-10 border ${overlayBg} ${borderTone}`}>
+                <div className={`w-full ${thumbBg} rounded-lg flex items-center justify-center py-6`}>
                     <img src={product.image} alt={product.title} className="h-32 object-contain" />
                 </div>
 
                 <div className="space-y-2">
-                    <h3 className="text-sm font-semibold line-clamp-2">{product.title}</h3>
-                    <p className="text-xs text-gray-600 line-clamp-3">{product.description}</p>
-                    <div className="flex items-center gap-2 text-sm font-semibold text-gray-900">
+                    <h3 className={`text-sm font-semibold line-clamp-2 ${titleColor}`}>{product.title}</h3>
+                    <p className={`text-xs line-clamp-3 ${descColor}`}>{product.description}</p>
+                    <div className={`flex items-center gap-2 text-sm font-semibold ${priceColor}`}>
                         <span>₹{(product.price * 83).toFixed(0)}</span>
-                        <span className="text-xs bg-yellow-100 text-yellow-700 px-2 py-1 rounded flex items-center gap-1">
-                            <FaStar className="text-yellow-500" />
+                        <span className={`text-xs px-2 py-1 rounded flex items-center gap-1 ${ratingBg}`}>
+                            <FaStar className={ratingIcon} />
                             {product.rating.toFixed(1)}
                         </span>
                     </div>
@@ -61,14 +72,14 @@ export default function ProductCard({ product }) {
                 <div className="flex gap-2 pt-1">
                     <button
                         onClick={handleAddToCart}
-                        className="flex-1 inline-flex items-center justify-center gap-2 bg-brand text-white px-3 py-2 rounded-lg text-sm font-semibold hover:bg-brand-dark transition"
+                        className={`flex-1 inline-flex items-center justify-center gap-2 text-white px-3 py-2 rounded-lg text-sm font-semibold transition ${primaryBtn}`}
                     >
                         <FaShoppingCart />
                         Add to Cart
                     </button>
                     <button
                         onClick={(e) => { e.stopPropagation(); navigate(`/products/${product.id}`) }}
-                        className="px-3 py-2 border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition flex items-center gap-2"
+                        className={`px-3 py-2 border rounded-lg text-sm font-semibold hover:bg-[var(--bg-muted)]/60 transition flex items-center gap-2 ${borderTone} text-[var(--text-primary)]`}
                     >
                         <FaEye />
                         View

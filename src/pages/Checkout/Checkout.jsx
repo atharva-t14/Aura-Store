@@ -68,22 +68,22 @@ export default function Checkout() {
 
     const renderInput = (props) => (
         <div className="space-y-1">
-            <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
+            <label className="text-sm font-medium text-[var(--text-muted)] flex items-center gap-2">
                 {props.icon}
                 <span>{props.label}</span>
                 {props.required && <span className="text-red-500">*</span>}
             </label>
             <input
                 {...props.inputProps}
-                className="w-full rounded-lg border border-gray-200 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand focus:border-brand"
+                className="w-full rounded-lg border border-[var(--bg-muted)] bg-[var(--bg-base)] text-[var(--text-primary)] placeholder:text-[var(--text-muted)] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand/70 focus:border-brand"
             />
             {props.error && <p className="text-xs text-red-600">{props.error}</p>}
         </div>
     )
 
     return (
-        <div className="grid lg:grid-cols-[2fr_1fr] gap-6">
-            <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 space-y-6">
+        <div className="grid lg:grid-cols-[2fr_1fr] gap-6 text-[var(--text-primary)]">
+            <div className="bg-[var(--bg-surface)] rounded-xl shadow-sm border border-[var(--bg-muted)] p-6 space-y-6">
                 {/* Stepper */}
                 <div className="flex items-center justify-between">
                     {steps.map((s, idx) => {
@@ -93,16 +93,16 @@ export default function Checkout() {
                         return (
                             <div key={s.id} className="flex-1 flex items-center">
                                 <div className={`flex items-center gap-3 ${idx !== steps.length - 1 ? 'w-full' : ''}`}>
-                                    <div className={`flex items-center justify-center w-10 h-10 rounded-full border-2 ${done ? 'border-green-500 bg-green-50 text-green-600' : active ? 'border-brand bg-brand/10 text-brand' : 'border-gray-200 text-gray-400'}`}>
+                                    <div className={`flex items-center justify-center w-10 h-10 rounded-full border-2 ${done ? 'border-green-500 bg-green-500/10 text-green-300' : active ? 'border-brand bg-brand/10 text-brand' : 'border-[var(--bg-muted)] text-[var(--text-muted)]'}`}>
                                         {done ? <FaCheckCircle /> : <Icon />}
                                     </div>
                                     <div>
-                                        <p className="text-xs uppercase tracking-wide text-gray-500">Step {s.id}</p>
-                                        <p className={`text-sm font-semibold ${active ? 'text-gray-900' : 'text-gray-600'}`}>{s.label}</p>
+                                        <p className="text-xs uppercase tracking-wide text-[var(--text-muted)]">Step {s.id}</p>
+                                        <p className={`text-sm font-semibold ${active ? 'text-[var(--text-primary)]' : 'text-[var(--text-muted)]'}`}>{s.label}</p>
                                     </div>
                                 </div>
                                 {idx !== steps.length - 1 && (
-                                    <div className={`h-0.5 flex-1 ${step > s.id ? 'bg-brand' : 'bg-gray-200'} mx-3`} />
+                                    <div className={`h-0.5 flex-1 ${step > s.id ? 'bg-brand' : 'bg-[var(--bg-muted)]'} mx-3`} />
                                 )}
                             </div>
                         )
@@ -170,7 +170,7 @@ export default function Checkout() {
                             })}
                             <div className="hidden md:block" />
                         </div>
-                        <div className="flex items-start gap-2 text-sm text-gray-600 bg-gray-50 border border-gray-100 rounded-lg p-3">
+                        <div className="flex items-start gap-2 text-sm text-[var(--text-muted)] bg-[var(--bg-base)]/40 border border-[var(--bg-muted)] rounded-lg p-3">
                             <FaShieldAlt className="text-brand mt-0.5" />
                             <p>Your address is secure and only used for delivery purposes.</p>
                         </div>
@@ -234,7 +234,7 @@ export default function Checkout() {
                             })}
                             <div className="hidden md:block" />
                         </div>
-                        <div className="flex items-start gap-2 text-sm text-gray-600 bg-gray-50 border border-gray-100 rounded-lg p-3">
+                        <div className="flex items-start gap-2 text-sm text-[var(--text-muted)] bg-[var(--bg-base)]/40 border border-[var(--bg-muted)] rounded-lg p-3">
                             <FaShieldAlt className="text-brand mt-0.5" />
                             <p>We use 256-bit encryption. Your payment details are never stored.</p>
                         </div>
@@ -244,23 +244,23 @@ export default function Checkout() {
                 {step === 3 && (
                     <div className="space-y-4">
                         <h2 className="text-lg font-semibold">Review & Confirm</h2>
-                        <div className="bg-gray-50 border border-gray-100 rounded-lg p-4 space-y-2">
-                            <div className="flex justify-between text-sm text-gray-600">
+                        <div className="bg-[var(--bg-base)]/40 border border-[var(--bg-muted)] rounded-lg p-4 space-y-2">
+                            <div className="flex justify-between text-sm text-[var(--text-muted)]">
                                 <span>Deliver to</span>
-                                <span className="font-semibold text-gray-900">{address.name || '—'}</span>
+                                <span className="font-semibold text-[var(--text-primary)]">{address.name || '—'}</span>
                             </div>
-                            <div className="text-sm text-gray-700 leading-relaxed">{address.address || 'No address provided yet.'}</div>
-                            <div className="text-sm text-gray-600">Phone: {address.phone || '—'}</div>
-                            <div className="text-sm text-gray-600">Pincode: {address.pincode || '—'}</div>
+                            <div className="text-sm text-[var(--text-muted)] leading-relaxed">{address.address || 'No address provided yet.'}</div>
+                            <div className="text-sm text-[var(--text-muted)]">Phone: {address.phone || '—'}</div>
+                            <div className="text-sm text-[var(--text-muted)]">Pincode: {address.pincode || '—'}</div>
                         </div>
-                        <div className="border border-gray-100 rounded-lg">
+                        <div className="border border-[var(--bg-muted)] rounded-lg">
                             {items.map(i => (
-                                <div key={i.id} className="flex justify-between items-center px-4 py-3 border-b last:border-none">
+                                <div key={i.id} className="flex justify-between items-center px-4 py-3 border-b border-[var(--bg-muted)] last:border-none">
                                     <div>
-                                        <p className="text-sm font-semibold text-gray-900 line-clamp-2">{i.title}</p>
-                                        <p className="text-xs text-gray-500">Qty: {i.qty}</p>
+                                        <p className="text-sm font-semibold text-[var(--text-primary)] line-clamp-2">{i.title}</p>
+                                        <p className="text-xs text-[var(--text-muted)]">Qty: {i.qty}</p>
                                     </div>
-                                    <p className="text-sm font-semibold text-gray-900">₹{(i.price * 83 * i.qty).toFixed(0)}</p>
+                                    <p className="text-sm font-semibold text-[var(--text-primary)]">₹{(i.price * 83 * i.qty).toFixed(0)}</p>
                                 </div>
                             ))}
                         </div>
@@ -270,7 +270,7 @@ export default function Checkout() {
                 {/* Footer actions */}
                 <div className="flex items-center justify-between pt-2">
                     <button
-                        className="inline-flex items-center gap-2 px-4 py-2 border border-gray-200 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-50 disabled:opacity-60"
+                        className="inline-flex items-center gap-2 px-4 py-2 border border-[var(--bg-muted)] rounded-lg text-sm font-semibold text-[var(--text-primary)] hover:bg-[var(--bg-muted)] disabled:opacity-60"
                         onClick={prev}
                         disabled={step === 1}
                     >
@@ -280,7 +280,7 @@ export default function Checkout() {
 
                     {step < 3 ? (
                         <button
-                            className="inline-flex items-center gap-2 px-5 py-2.5 bg-brand text-white rounded-lg text-sm font-semibold hover:bg-brand-dark disabled:opacity-60"
+                            className="inline-flex items-center gap-2 px-5 py-2.5 bg-brand text-[var(--bg-base)] rounded-lg text-sm font-semibold hover:bg-brand-dark disabled:opacity-60"
                             onClick={next}
                             disabled={(step === 1 && !addressValidation.valid) || (step === 2 && !paymentValidation.valid)}
                         >
@@ -289,7 +289,7 @@ export default function Checkout() {
                         </button>
                     ) : (
                         <button
-                            className="inline-flex items-center gap-2 px-5 py-2.5 bg-green-600 text-white rounded-lg text-sm font-semibold hover:bg-green-700"
+                            className="inline-flex items-center gap-2 px-5 py-2.5 bg-brand text-[var(--bg-base)] rounded-lg text-sm font-semibold hover:bg-brand-dark"
                             onClick={confirm}
                         >
                             Place Order
@@ -300,45 +300,45 @@ export default function Checkout() {
             </div>
 
             {/* Order Summary */}
-            <aside className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 h-fit sticky top-20 space-y-4">
+            <aside className="bg-[var(--bg-surface)] rounded-xl shadow-sm border border-[var(--bg-muted)] p-6 h-fit sticky top-20 space-y-4 text-[var(--text-primary)]">
                 <div className="flex items-center justify-between">
                     <h3 className="text-lg font-semibold">Order Summary</h3>
-                    <span className="text-sm text-gray-500">{totalItems} item(s)</span>
+                    <span className="text-sm text-[var(--text-muted)]">{totalItems} item(s)</span>
                 </div>
-                <div className="divide-y divide-gray-100">
+                <div className="divide-y divide-[var(--bg-muted)]">
                     {items.map(i => (
                         <div key={i.id} className="py-3 flex gap-3">
-                            <div className="w-14 h-14 rounded border border-gray-100 bg-gray-50 flex items-center justify-center overflow-hidden">
+                            <div className="w-14 h-14 rounded border border-[var(--bg-muted)] bg-[var(--bg-base)] flex items-center justify-center overflow-hidden">
                                 <img src={i.image} alt={i.title} className="w-full h-full object-contain" />
                             </div>
                             <div className="flex-1 space-y-1">
-                                <p className="text-sm font-semibold text-gray-900 line-clamp-2">{i.title}</p>
-                                <p className="text-xs text-gray-500">Qty: {i.qty} • ₹{(i.price * 83).toFixed(0)} each</p>
+                                <p className="text-sm font-semibold text-[var(--text-primary)] line-clamp-2">{i.title}</p>
+                                <p className="text-xs text-[var(--text-muted)]">Qty: {i.qty} • ₹{(i.price * 83).toFixed(0)} each</p>
                             </div>
-                            <p className="text-sm font-semibold text-gray-900 whitespace-nowrap">₹{(i.price * 83 * i.qty).toFixed(0)}</p>
+                            <p className="text-sm font-semibold text-[var(--text-primary)] whitespace-nowrap">₹{(i.price * 83 * i.qty).toFixed(0)}</p>
                         </div>
                     ))}
                 </div>
-                <div className="space-y-2 text-sm text-gray-700">
+                <div className="space-y-2 text-sm text-[var(--text-muted)]">
                     <div className="flex justify-between">
                         <span>Subtotal</span>
-                        <span>₹{totalPrice.toFixed(0)}</span>
+                        <span className="text-[var(--text-primary)]">₹{totalPrice.toFixed(0)}</span>
                     </div>
                     <div className="flex justify-between">
                         <span>Shipping</span>
-                        <span className="text-green-600">{shipping === 0 ? 'Free' : `₹${shipping}`}</span>
+                        <span className="text-amber-300">{shipping === 0 ? 'Free' : `₹${shipping}`}</span>
                     </div>
                 </div>
-                <div className="flex justify-between items-center pt-2 border-t border-gray-100">
-                    <span className="text-sm font-semibold text-gray-900">Total</span>
-                    <span className="text-xl font-bold text-gray-900">₹{grandTotal.toFixed(0)}</span>
+                <div className="flex justify-between items-center pt-2 border-t border-[var(--bg-muted)]">
+                    <span className="text-sm font-semibold text-[var(--text-primary)]">Total</span>
+                    <span className="text-xl font-bold text-[var(--text-primary)]">₹{grandTotal.toFixed(0)}</span>
                 </div>
-                <div className="text-xs text-gray-500 flex items-center gap-2">
+                <div className="text-xs text-[var(--text-muted)] flex items-center gap-2">
                     <FaShieldAlt className="text-brand" /> Secure checkout • Encrypted payments
                 </div>
                 {step === 3 && (
                     <button
-                        className="w-full inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-green-600 text-white rounded-lg text-sm font-semibold hover:bg-green-700"
+                        className="w-full inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-brand text-[var(--bg-base)] rounded-lg text-sm font-semibold hover:bg-brand-dark"
                         onClick={confirm}
                     >
                         Place Order

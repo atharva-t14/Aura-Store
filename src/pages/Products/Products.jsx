@@ -53,10 +53,10 @@ export default function Products() {
     const handleNext = () => setPage(p => Math.min(totalPages, p + 1))
 
     return (
-        <div className="flex gap-6">
+        <div className="flex gap-6 bg-[var(--bg-base)] min-h-screen p-4 md:p-6 rounded-lg">
             {/* Sidebar Filters */}
-            <aside className="w-64 bg-white rounded-lg shadow p-4 h-fit sticky top-20 hidden lg:block">
-                <h3 className="font-semibold text-lg mb-4">Filters</h3>
+            <aside className="w-64 bg-[var(--bg-surface)] border border-[var(--bg-muted)] rounded-xl shadow-sm p-4 h-fit sticky top-20 hidden lg:block">
+                <h3 className="font-semibold text-lg mb-4 text-[var(--text-primary)]">Filters</h3>
 
                 {/* Search */}
                 <div className="mb-6">
@@ -65,7 +65,7 @@ export default function Products() {
                         value={search}
                         onChange={e => setSearch(e.target.value)}
                         placeholder="Search products..."
-                        className="w-full border rounded px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-brand"
+                        className="w-full border border-[var(--bg-muted)] rounded px-3 py-2 text-sm bg-[var(--bg-base)] text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-brand/60"
                     />
                 </div>
 
@@ -75,7 +75,7 @@ export default function Products() {
                     <select
                         value={selectedCategory}
                         onChange={e => setSelectedCategory(e.target.value)}
-                        className="w-full border rounded px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-brand"
+                        className="w-full border border-[var(--bg-muted)] rounded px-3 py-2 text-sm bg-[var(--bg-base)] text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-brand/60"
                     >
                         <option value="All">All Categories</option>
                         {categories.map(cat => (
@@ -95,7 +95,7 @@ export default function Products() {
                                 className="focus:outline-none transition"
                             >
                                 <FaStar
-                                    className={`text-2xl ${star <= rating ? 'text-yellow-400' : 'text-gray-300'}`}
+                                    className={`text-2xl ${star <= rating ? 'text-amber-400' : 'text-[var(--bg-muted)]'}`}
                                 />
                             </button>
                         ))}
@@ -107,10 +107,10 @@ export default function Products() {
 
                 {/* Price Range */}
                 <div className="mb-4">
-                    <label className="text-sm font-medium mb-2 block">Price Range (₹)</label>
+                    <label className="text-sm font-medium mb-2 block text-[var(--text-primary)]">Price Range (₹)</label>
                     <div className="flex items-center justify-between mb-2">
-                        <span className="text-xs text-gray-600">₹{minPrice}</span>
-                        <span className="text-xs text-gray-600">₹{maxPrice}</span>
+                        <span className="text-xs text-[var(--text-muted)]">₹{minPrice}</span>
+                        <span className="text-xs text-[var(--text-muted)]">₹{maxPrice}</span>
                     </div>
                     <div className="relative h-2">
                         <input
@@ -146,14 +146,14 @@ export default function Products() {
             </aside>
 
             {/* Main Content */}
-            <div className="flex-1">
+            <div className="flex-1 space-y-4">
                 {/* Mobile Filter Bar */}
-                <div className="lg:hidden bg-white rounded-lg shadow p-4 mb-4">
+                <div className="lg:hidden bg-[var(--bg-surface)] border border-[var(--bg-muted)] rounded-xl shadow-sm p-4 mb-4">
                     <input
                         value={search}
                         onChange={e => setSearch(e.target.value)}
                         placeholder="Search products..."
-                        className="w-full border rounded px-3 py-2 text-sm"
+                        className="w-full border border-[var(--bg-muted)] rounded px-3 py-2 text-sm bg-[var(--bg-base)] text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-brand/60"
                     />
                 </div>
 
@@ -169,19 +169,19 @@ export default function Products() {
 
                 {status === 'succeeded' && filtered.length > 0 && (
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mt-6">
-                        <div className="text-sm text-gray-600">
+                        <div className="text-sm text-[var(--text-muted)]">
                             Showing {(page - 1) * pageSize + 1}–{Math.min(page * pageSize, filtered.length)} of {filtered.length}
                         </div>
                         <div className="flex items-center gap-2">
-                            <button onClick={handlePrev} disabled={page === 1} className="px-3 py-1 border rounded disabled:opacity-60">Prev</button>
-                            <span className="text-sm">Page {page} / {totalPages}</span>
-                            <button onClick={handleNext} disabled={page === totalPages} className="px-3 py-1 border rounded disabled:opacity-60">Next</button>
+                            <button onClick={handlePrev} disabled={page === 1} className="px-3 py-1 border border-[var(--bg-muted)] rounded disabled:opacity-60 bg-[var(--bg-surface)] hover:bg-[var(--bg-muted)]">Prev</button>
+                            <span className="text-sm text-[var(--text-primary)]">Page {page} / {totalPages}</span>
+                            <button onClick={handleNext} disabled={page === totalPages} className="px-3 py-1 border border-[var(--bg-muted)] rounded disabled:opacity-60 bg-[var(--bg-surface)] hover:bg-[var(--bg-muted)]">Next</button>
                         </div>
                     </div>
                 )}
 
                 {status === 'succeeded' && filtered.length === 0 && (
-                    <div className="text-center py-12 text-gray-500">
+                    <div className="text-center py-12 text-[var(--text-muted)]">
                         No products found matching your filters.
                     </div>
                 )}
