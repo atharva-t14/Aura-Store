@@ -223,7 +223,7 @@ src/
 ```bash
 # Clone the repository
 git clone https://github.com/atharva-t14/Aura-Store.git
-cd ecom_ui_v2
+cd Aura-Store
 
 # Install dependencies
 npm install
